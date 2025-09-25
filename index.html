@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sr" class="scroll-smooth">
 <head>
@@ -55,9 +56,13 @@
             box-shadow: 0 4px 25px 0 rgba(0, 245, 212, 0.2);
             cursor: pointer;
         }
-        .btn-gradient:hover {
+        .btn-gradient:hover:not(:disabled) {
             transform: translateY(-4px) scale(1.05);
             box-shadow: 0 10px 35px 0 rgba(247, 37, 133, 0.3);
+        }
+        .btn-gradient:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .text-gradient {
             background: -webkit-linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
@@ -302,7 +307,7 @@
                             <p>Kursevi su za sve koji žele da unaprede svoje veštine - preduzetnike, studente, menadžere, prodavce, ali i sve one koji žele da izgrade jače privatne odnose i postanu samopouzdaniji u svakodnevnim interakcijama.</p>
                         </div>
                     </div>
-                    <div class="border-b border-border-color py-4">
+                    <div class="py-4">
                          <h3 class="text-lg font-medium">
                             <button @click="open = (open === 2 ? null : 2)" class="w-full flex justify-between items-center text-left">
                                 <span>Koliko vremena dnevno je potrebno?</span>
@@ -311,17 +316,6 @@
                         </h3>
                         <div x-show="open === 2" x-collapse class="pt-3 text-sm text-text-secondary">
                             <p>Svaka lekcija je dizajnirana da zahteva oko 15-20 minuta vašeg vremena za teoriju, plus vreme koje posvetite praktičnoj primeni tokom dana. Fleksibilno je i možete ga prilagoditi svom rasporedu.</p>
-                        </div>
-                    </div>
-                    <div class="py-4">
-                        <h3 class="text-lg font-medium">
-                            <button @click="open = (open === 3 ? null : 3)" class="w-full flex justify-between items-center text-left">
-                                <span>Šta ako mi se kurs ne svidi?</span>
-                                <i class="fas transition-transform" :class="open === 3 ? 'fa-chevron-up' : 'fa-chevron-down'" aria-hidden="true"></i>
-                            </button>
-                        </h3>
-                        <div x-show="open === 3" x-collapse class="pt-3 text-sm text-text-secondary">
-                             <p>Nudimo bezuslovnu garanciju povrata novca u roku od 14 dana. Ako iz bilo kog razloga niste zadovoljni, samo nam se javite i vratićemo vam kompletan iznos, bez postavljanja pitanja.</p>
                         </div>
                     </div>
                 </div>
@@ -360,43 +354,72 @@
              x-transition:leave="transition ease-in duration-200"
              x-transition:leave-start="opacity-100 transform scale-100"
              x-transition:leave-end="opacity-0 transform scale-95"
-             class="glass-card w-full max-w-lg p-8 relative">
+             class="glass-card w-full max-w-lg p-6 md:p-8 relative max-h-[90vh] overflow-y-auto">
              
-            <button @click="modalOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+            <button @click="closeModalAndResetForm()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
                 <span class="sr-only">Zatvori prozor</span>
                 <i class="fas fa-times text-2xl" aria-hidden="true"></i>
             </button>
             
-            <h3 id="modal-title" class="text-2xl font-bold text-center mb-6">Uputstvo za Naručivanje</h3>
-            
-            <div class="text-sm text-text-secondary space-y-4">
-                <p>Pratite sledeće korake da biste uspešno naručili kurs "<strong x-text="selectedCourseName" class="text-primary-accent"></strong>".</p>
+            <div x-show="formStatus !== 'success'">
+                <h3 id="modal-title" class="text-2xl font-bold text-center mb-6">Uputstvo za Naručivanje</h3>
                 
-                <div class="border border-border-color rounded-lg p-4">
-                    <p class="font-bold text-text-primary mb-2">Korak 1: Podaci za uplatu</p>
-                    <p>Posetite najbližu poštu, banku ili menjačnicu koja pruža usluge Western Union-a i izvršite uplatu koristeći sledeće podatke:</p>
-                    <ul class="list-disc list-inside mt-2 space-y-1 text-text-primary">
-                        <li><strong>Ime primaoca:</strong> Nikola</li>
-                        <li><strong>Prezime primaoca:</strong> Spiridonović</li>
-                        <li><strong>Grad:</strong> Beograd</li>
-                        <li><strong>Država:</strong> Srbija</li>
-                        <li><strong>Iznos za uplatu:</strong> <span x-text="selectedCoursePrice" class="font-bold"></span> EUR (u dinarskoj protivvrednosti)</li>
-                    </ul>
+                <div class="text-sm text-text-secondary space-y-4">
+                    <p>Pratite sledeće korake da biste uspešno naručili kurs "<strong x-text="selectedCourseName" class="text-primary-accent"></strong>".</p>
+                    
+                    <div class="border border-border-color rounded-lg p-4">
+                        <p class="font-bold text-text-primary mb-2">Korak 1: Podaci za uplatu</p>
+                        <p>Posetite najbližu poštu, banku ili menjačnicu koja pruža usluge Western Union-a i izvršite uplatu koristeći sledeće podatke:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-text-primary">
+                            <li><strong>Ime primaoca:</strong> Nikola</li>
+                            <li><strong>Prezime primaoca:</strong> Spiridonović</li>
+                            <li><strong>Grad:</strong> Beograd</li>
+                            <li><strong>Država:</strong> Srbija</li>
+                            <li><strong>Iznos za uplatu:</strong> <span x-text="selectedCoursePrice" class="font-bold"></span> EUR (u dinarskoj protivvrednosti)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="border border-border-color rounded-lg p-4">
+                        <p class="font-bold text-text-primary mb-2">Korak 2: Potvrda narudžbine</p>
+                        <p>Nakon uplate, dobićete potvrdu sa <strong>kontrolnim brojem transfera novca (MTCN)</strong>. Popunite formu ispod sa traženim podacima i tim brojem da biste završili narudžbinu.</p>
+                    </div>
                 </div>
-                
-                <div class="border border-border-color rounded-lg p-4">
-                    <p class="font-bold text-text-primary mb-2">Korak 2: Potvrda narudžbine</p>
-                    <p>Nakon uplate, dobićete potvrdu sa **kontrolnim brojem transfera novca (MTCN)**. Sačuvajte ovaj broj.</p>
-                    <p class="mt-2">Kliknite na dugme ispod kako biste nam poslali email. U telu email-a koji se otvori, **unesite MTCN broj** na označeno mesto.</p>
-                </div>
-                
-                <p class="text-xs text-center pt-2">Kurs će vam biti isporučen na email adresu sa koje pošaljete potvrdu u roku od 24 sata od provere uplate.</p>
+
+                <form @submit.prevent="handleFormSubmit()" class="mt-6 space-y-4">
+                    <input type="hidden" x-model="formData.courseName">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-text-secondary mb-1">Vaše Ime i Prezime</label>
+                        <input type="text" id="name" name="name" x-model="formData.name" required class="w-full bg-black/20 border border-border-color rounded-lg px-4 py-2 text-text-primary focus:ring-2 focus:ring-primary-accent focus:border-primary-accent outline-none transition">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-text-secondary mb-1">Vaš Email (gde šaljemo kurs)</label>
+                        <input type="email" id="email" name="email" x-model="formData.email" required class="w-full bg-black/20 border border-border-color rounded-lg px-4 py-2 text-text-primary focus:ring-2 focus:ring-primary-accent focus:border-primary-accent outline-none transition">
+                    </div>
+                    <div>
+                        <label for="mtcn" class="block text-sm font-medium text-text-secondary mb-1">Kontrolni broj (MTCN)</label>
+                        <input type="text" id="mtcn" name="mtcn" x-model="formData.mtcn" required class="w-full bg-black/20 border border-border-color rounded-lg px-4 py-2 text-text-primary focus:ring-2 focus:ring-primary-accent focus:border-primary-accent outline-none transition">
+                    </div>
+                    <div class="pt-4">
+                        <button type="submit" :disabled="formStatus === 'submitting'" class="w-full text-center px-6 py-3 btn-gradient rounded-full flex items-center justify-center">
+                            <span x-show="formStatus !== 'submitting'"><i class="fas fa-paper-plane mr-2"></i> Potvrdi i Pošalji Podatke</span>
+                            <span x-show="formStatus === 'submitting'">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Slanje...
+                            </span>
+                        </button>
+                    </div>
+                     <p x-show="formStatus === 'error'" class="text-center text-sm text-red-400 mt-2">Došlo je do greške. Molimo pokušajte ponovo ili pošaljite podatke direktno na email: nklpupin@gmail.com</p>
+                </form>
             </div>
-            
-            <div class="mt-8">
-                <a :href="generateMailtoLink()" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">
-                    <i class="fas fa-envelope mr-2" aria-hidden="true"></i> Potvrdi Narudžbinu Emailom
-                </a>
+
+            <div x-show="formStatus === 'success'" class="text-center">
+                 <div class="text-6xl mb-4 text-primary-accent"><i class="fas fa-check-circle"></i></div>
+                 <h3 class="text-2xl font-bold mb-2">Hvala Vam!</h3>
+                 <p class="text-text-secondary">Vaša narudžbina je uspešno primljena. Kurs će Vam biti poslat na email <strong x-text="formData.email" class="text-text-primary"></strong> u roku od 24 sata.</p>
+                 <button @click="closeModalAndResetForm()" class="mt-6 px-8 py-2 btn-gradient rounded-full">Zatvori</button>
             </div>
         </div>
     </div>
@@ -413,23 +436,87 @@
                 modalOpen: false,
                 selectedCourseName: '',
                 selectedCoursePrice: '',
+                formStatus: 'idle', // idle, submitting, success, error
+                formData: {
+                    name: '',
+                    email: '',
+                    mtcn: '',
+                    courseName: ''
+                },
                 
                 openModal(name, price) {
                     this.selectedCourseName = name;
                     this.selectedCoursePrice = price;
+                    this.formData.courseName = name;
                     this.modalOpen = true;
                 },
                 
-                generateMailtoLink() {
-                    const subject = `Narudzbina kursa: ${this.selectedCourseName}`;
-                    const body = `Zdravo,\n\nŽelim da naručim kurs "${this.selectedCourseName}".\n\nUplatu sam izvršio/la preko Western Union-a.\n\nKontrolni broj transfera novca (MTCN) je: [ OVDE UMETNITE KONTROLNI BROJ ]\n\nLep pozdrav,\n[ VASE IME I PREZIME ]`;
-                    return `mailto:nklpupin@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                closeModalAndResetForm() {
+                    this.modalOpen = false;
+                    setTimeout(() => {
+                        this.formStatus = 'idle';
+                        this.formData.name = '';
+                        this.formData.email = '';
+                        this.formData.mtcn = '';
+                    }, 300); // Delay for closing animation
+                },
+
+                handleFormSubmit() {
+                    this.formStatus = 'submitting';
+                    
+                    // ####################################################################################
+                    // ############################ OBAVEZNO PROCITATI ####################################
+                    // ####################################################################################
+                    //
+                    // DA BI FORMA RADILA, MORATE ZAMENITI LINK ISPOD SVOJIM JEDINSTVENIM LINKOM.
+                    // TRENUTNO JE POSTAVLJEN TESTNI LINK I PORUKE VAM NECE STIZATI.
+                    //
+                    // KORACI:
+                    // 1. Idite na sajt: https://formspree.io/
+                    // 2. Napravite BESPLATAN nalog sa emailom na koji primate narudžbine (npr. nklpupin@gmail.com).
+                    // 3. Potvrdite email i kreirajte novu formu ("+ New Form").
+                    // 4. Dobićete jedinstveni URL koji izgleda ovako: https://formspree.io/f/xxxxxxxx
+                    // 5. ZAMENITE LINK 'https://formspree.io/f/xgegqjqb' ISPOD SA VAŠIM NOVIM LINKOM.
+                    //
+                    // AKO OVO NE URADITE, FORMA NEĆE RADITI I NEĆETE DOBIJATI NARUDŽBINE.
+                    //
+                    const formspreeEndpoint = 'https://formspree.io/f/xrbybapo'; 
+                    // ####################################################################################
+                    // ####################################################################################
+
+                    fetch(formspreeEndpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "Ime i Prezime": this.formData.name,
+                            "Email": this.formData.email,
+                            "MTCN Broj": this.formData.mtcn,
+                            "Naručeni Kurs": this.formData.courseName,
+                            "_subject": `Nova narudžbina za kurs: ${this.formData.courseName}`
+                        })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            this.formStatus = 'success';
+                        } else {
+                            response.json().then(data => {
+                                if (Object.hasOwn(data, 'errors')) {
+                                    console.log(data.errors.map(error => error.message).join(", "));
+                                }
+                                this.formStatus = 'error';
+                            })
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Došlo je do greške pri slanju forme:', error);
+                        this.formStatus = 'error';
+                    });
                 },
 
                 init() {
-                    // ISPRAVKA: Uklonjen 'DOMContentLoaded' listener. 
-                    // Funkcije se sada pozivaju direktno, što je ispravno 
-                    // jer x-init čeka da DOM bude spreman.
                     this.initGsapAnimations();
                     this.init3DBackground();
                 },
@@ -548,4 +635,6 @@
     </script>
 </body>
 </html>
+
+
 
