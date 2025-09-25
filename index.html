@@ -1,1137 +1,550 @@
-﻿<!DOCTYPE html>
-<html lang="sr">
+<!DOCTYPE html>
+<html lang="sr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maksimalni Uticaj: 21 Dan Moći Komunikacije</title>
+    <title>ASCENDRIX - Otključaj Svoj Maksimalni Uticaj</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         :root {
-            --bg-main: #191825; /* Duboka indigo pozadina */
-            --bg-glass: rgba(45, 43, 62, 0.6); /* Tamniji glass efekat */
-            --border-color: rgba(147, 145, 166, 0.2);
-            --text-primary: #F9FAFB;
-            --text-secondary: #D1D5DB;
-            --accent-primary: #C778DD; /* Jarka ljubičasta */
-            --accent-secondary: #57B8FF; /* Električno plava */
-            --accent-glow: rgba(199, 120, 221, 0.25);
-            --completed-color: #34D399;
-            --font-naslov: 'Montserrat', sans-serif;
-            --font-telo: 'Open Sans', sans-serif;
+            --bg-dark: #101010;
+            --bg-glass: rgba(20, 20, 20, 0.5);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #F5F5F5;
+            --text-secondary: #A1A1A1;
+            --primary-accent: #00F5D4; /* Vibrant Teal */
+            --secondary-accent: #F72585; /* Bright Pink */
         }
-
-        /* --- Globalni Stilovi & Pozadina --- */
-        html { scroll-behavior: smooth; }
-
         body {
-            background-color: var(--bg-main);
-            color: var(--text-secondary);
-            font-family: var(--font-telo);
-            line-height: 1.7;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-
-        .background-aurora {
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
         }
-
-        .background-aurora::before, .background-aurora::after {
-            content: '';
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            background-image: radial-gradient(circle, var(--accent-primary) 0%, transparent 60%);
-            border-radius: 50%;
-            opacity: 0.15;
-            filter: blur(120px);
-            animation: move-glow 25s infinite alternate;
-        }
-
-        .background-aurora::after {
-            background-image: radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%);
-            animation-name: move-glow-2;
-            animation-delay: -12.5s;
-        }
-
-        @keyframes move-glow {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.2); }
-            100% { transform: translate(50%, 50%) rotate(360deg) scale(1.8); }
-        }
-        @keyframes move-glow-2 {
-            0% { transform: translate(50%, -50%) rotate(0deg) scale(1.5); }
-            100% { transform: translate(-50%, 50%) rotate(-360deg) scale(0.9); }
-        }
-
-        /* --- Stakleni Efekat (Glassmorphism) --- */
-        .glass-effect {
+        .glass-card {
             background: var(--bg-glass);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--border-color);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-        .glass-effect:hover {
-            background: rgba(67, 64, 91, 0.7);
-            border-color: rgba(147, 145, 166, 0.3);
-        }
-
-        /* --- Tipografija & Tekst --- */
-        .kurs-main-text { 
-            color: var(--text-primary); 
-            font-family: var(--font-naslov);
-            text-shadow: 0 0 15px var(--accent-glow);
-        }
-        .kurs-secondary-text { color: var(--text-secondary); font-family: var(--font-telo); }
-        .kurs-accent { color: var(--accent-primary); }
-        strong { color: var(--accent-primary); font-weight: 600; }
-        h2, h3, h4 { font-family: var(--font-naslov); color: var(--text-primary); }
-
-        /* --- Sidebar & Navigacija --- */
-        #sidebar {
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .nav-link {
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
             transition: all 0.3s ease;
-            padding: 0.85rem 1.25rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            position: relative;
-            cursor: pointer;
-            border: 1px solid transparent;
         }
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
+        .glass-card:hover {
+            border-color: rgba(0, 245, 212, 0.5);
         }
-        .nav-link.active {
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            color: var(--bg-main);
-            font-weight: 700;
-            box-shadow: 0 5px 20px 0 rgba(199, 120, 221, 0.25);
-        }
-        .nav-link .fa-check-circle { display: none; margin-left: auto; }
-        .nav-link.completed .fa-check-circle { display: inline-block; color: var(--completed-color); }
-        .nav-link.active.completed .fa-check-circle { color: white; }
-
-        /* --- Sadržaj Modula --- */
-        .module-content { animation: fadeIn 1s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* --- Interaktivni Elementi --- */
-        .kurs-button {
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            color: var(--bg-main);
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px -5px var(--accent-glow);
-            font-family: var(--font-telo);
+        .btn-gradient {
+            background-image: linear-gradient(to right, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+            color: #101010;
             font-weight: 700;
             border: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .kurs-button:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.5s ease;
-        }
-        .kurs-button:hover:before {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .kurs-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px -5px var(--accent-glow);
-        }
-        .kurs-button:disabled {
-            background: #4B5563;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-        
-        textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 1rem;
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-family: var(--font-telo);
-            transition: border-color 0.3s, box-shadow 0.3s;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-color);
-        }
-        textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 4px var(--accent-glow);
-        }
-
-        /* --- Notifikacije --- */
-        .message-box {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--bg-main);
-            padding: 14px 28px;
-            border-radius: 8px;
-            z-index: 1000;
-            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-family: var(--font-telo);
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            box-shadow: 0 5px 20px 0 rgba(199, 120, 221, 0.3);
-        }
-        .message-box.show { bottom: 20px; }
-
-        /* --- Infografika & Kalendar --- */
-        .infographic-card {
-            padding: 1.5rem;
-            text-align: center;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .infographic-card:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-        .infographic-card .icon {
-            font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-primary);
-            text-shadow: 0 0 20px var(--accent-glow);
-        }
-        
-        #calendar-container { padding: 1.5rem; border-radius: 16px; margin-top: 2rem; }
-        
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 12px;
-        }
-        
-        .calendar-day {
-            border-radius: 8px;
-            padding: 1rem 0.5rem;
-            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 25px 0 rgba(0, 245, 212, 0.2);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 700;
-            position: relative;
-            font-family: var(--font-naslov);
         }
+        .btn-gradient:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 35px 0 rgba(247, 37, 133, 0.3);
+        }
+        .text-gradient {
+            background: -webkit-linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-primary-accent { color: var(--primary-accent); }
+        .text-secondary-accent { color: var(--secondary-accent); }
 
-        .calendar-day:hover {
-            transform: translateY(-5px);
-            color: var(--bg-main);
-            box-shadow: 0 5px 15px var(--accent-glow);
-            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+        .popular-card {
+            border-width: 2px;
+            border-color: transparent;
+            background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+                        linear-gradient(to right, var(--primary-accent), var(--secondary-accent)) border-box;
+            transform: scale(1.05);
         }
-        .calendar-day.completed { background: var(--completed-color); color: white; }
-        .calendar-day.completed:hover { background-color: #2f9e7c; }
+        [x-cloak] { display: none !important; }
 
-        /* --- Harmonika (Accordion) --- */
-        .accordion-trigger {
-            transition: background-color 0.3s ease;
-        }
-        .accordion-trigger:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        .accordion-icon {
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .accordion-item.active .accordion-icon {
-            transform: rotate(-180deg);
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-accent); }
     </style>
 </head>
-<body>
 
-    <div class="background-aurora"></div>
+<body x-data="appData()" x-init="init()">
+    <canvas id="bg-canvas"></canvas>
 
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden md:hidden"></div>
-
-    <div class="flex min-h-screen">
-        <!-- Sidebar -->
-        <aside id="sidebar" class="w-72 p-4 fixed top-0 left-0 h-full overflow-y-auto transform -translate-x-full md:translate-x-0 z-30 glass-effect rounded-r-2xl border-l-0 border-t-0 border-b-0">
-            <div class="text-center my-6">
-                <h1 class="text-2xl font-bold kurs-main-text">Maksimalni Uticaj</h1>
-                <p class="text-sm kurs-secondary-text">Tvoj 21-dnevni kurs, Majstore Uticaja</p>
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4 glass-card !rounded-t-none !border-x-0 !border-t-0">
+            <div class="flex items-center justify-between">
+                <div class="md:w-1/3">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                            class="md:hidden text-white focus:outline-none z-50"
+                            aria-controls="mobile-menu" 
+                            :aria-expanded="mobileMenuOpen.toString()">
+                        <span class="sr-only">Otvori/zatvori meni</span>
+                        <i class="fas text-xl" :class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+                <div class="md:w-1/3 text-center">
+                    <a href="#" class="text-2xl font-bold tracking-wider text-gradient">ASCENDRIX</a>
+                </div>
+                <div class="md:w-1/3 flex items-center justify-end">
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="#features" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Šta učiš?</a>
+                        <a href="#courses" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Kursevi</a>
+                        <a href="#testimonials" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Iskustva</a>
+                        <a href="#faq" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">FAQ</a>
+                    </nav>
+                    <a href="#courses" class="hidden lg:block ml-8 px-6 py-2 btn-gradient rounded-full text-sm">Pogledaj Kurseve</a>
+                </div>
             </div>
-            <nav id="navigation" class="space-y-1 px-2">
-                <a href="#uvod" data-target="uvod" class="nav-link active"><i class="fas fa-atom mr-3 w-5 text-center"></i> Tvoj Početak</a>
-                <a href="#dnevnik" data-target="dnevnik" class="nav-link"><i class="fas fa-book-open mr-3 w-5 text-center"></i> Moj Dnevnik</a>
-                
-                <div class="nav-group mt-6">
-                    <p class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Nedelja 1: Nesvesna Komunikacija</p>
-                    <div class="mt-1 space-y-1"></div>
-                </div>
-                <div class="nav-group mt-6">
-                    <p class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Nedelja 2: Umetnost Jezika</p>
-                    <div class="mt-1 space-y-1"></div>
-                </div>
-                <div class="nav-group mt-6">
-                    <p class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Nedelja 3: Napredne Strategije</p>
-                    <div class="mt-1 space-y-1"></div>
-                </div>
-            </nav>
-        </aside>
+        </div>
+    </header>
 
-        <!-- Mobile Menu Toggle -->
-        <button id="menu-toggle" class="md:hidden fixed top-4 left-4 z-40 p-2 kurs-button rounded-full w-12 h-12 shadow-lg">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Main Content -->
-        <main class="flex-1 md:ml-72 p-6 md:p-10 transition-all duration-300">
-            <div id="content-area">
-                <!-- Sadržaj se dinamički ubacuje ovde -->
-            </div>
-        </main>
+    <!-- Mobile Nav-->
+    <div id="mobile-menu" x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform -translate-y-full"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform translate-y-0"
+         x-transition:leave-end="opacity-0 transform -translate-y-full"
+         class="fixed top-0 left-0 right-0 bottom-0 z-40 bg-bg-dark/90 backdrop-blur-lg flex flex-col items-center justify-center">
+        <nav class="flex flex-col items-center space-y-8">
+            <a @click="mobileMenuOpen = false" href="#features" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">Šta učiš?</a>
+            <a @click="mobileMenuOpen = false" href="#courses" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">Kursevi</a>
+            <a @click="mobileMenuOpen = false" href="#testimonials" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">Iskustva</a>
+            <a @click="mobileMenuOpen = false" href="#faq" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">FAQ</a>
+            <a @click="mobileMenuOpen = false" href="#courses" class="mt-8 px-8 py-3 btn-gradient rounded-full text-lg">Pogledaj Kurseve</a>
+        </nav>
     </div>
 
-    <!-- Message Box za notifikacije -->
-    <div id="message-box" class="message-box"></div>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-screen flex items-center justify-center overflow-hidden">
+            <div class="text-center z-20 relative px-6">
+                <h1 id="hero-title" class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+                    Postani Verzija Sebe <span class="text-gradient">Kojoj Se Diviš</span>
+                </h1>
+                <p id="hero-subtitle" class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-text-secondary">
+                    Prestani da budeš nevidljiv. Naši kursevi ti daju konkretne alate iz psihologije i komunikacije da postaneš magnet za ljude, uspeh i prilike.
+                </p>
+                <div id="hero-cta" class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#courses" class="w-full sm:w-auto px-10 py-4 btn-gradient rounded-full text-lg">
+                        <i class="fas fa-rocket mr-2" aria-hidden="true"></i> Započni Transformaciju
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-24 animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold">Šta Zapravo Dobijaš?</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-secondary">
+                        Ovo nisu dosadna predavanja. Ovo su operativni sistemi za reprogramiranje tvog mozga.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 text-center">
+                        <div class="text-4xl mb-4 text-primary-accent"><i class="fas fa-magnet" aria-hidden="true"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Postani Magnet za Ljude</h3>
+                        <p class="text-sm text-text-secondary">Zaboravi na neprijatnu tišinu. Nauči kako da za 5 minuta stvoriš duboku, nesvesnu konekciju sa bilo kim. Zamisli da ti ljudi veruju i žele da budu u tvom društvu. To je tvoja nova realnost.</p>
+                    </div>
+                    <div class="glass-card p-8 text-center">
+                        <div class="text-4xl mb-4 text-secondary-accent"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Uđi Ljudima u Glavu (Etički)</h3>
+                        <p class="text-sm text-text-secondary">Otkrij tajne psihološke okidače koji kontrolišu odluke. Kada razumeš kako mozak radi, ubeđivanje postaje igra. Nauči da vodiš ljude ka 'DA' na način da se osećaju sjajno zbog toga.</p>
+                    </div>
+                    <div class="glass-card p-8 text-center">
+                        <div class="text-4xl mb-4 text-primary-accent"><i class="fas fa-bomb" aria-hidden="true"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Reči Koje Menjaju Stvarnost</h3>
+                        <p class="text-sm text-text-secondary">Tvoje reči su alat. Ili oružje. Mi te učimo kako da ih koristiš sa hirurškom preciznošću. Ubaci ideje direktno u um sagovornika i učini da tvoji predlozi zvuče kao njihova genijalna ideja.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses (Pricing) Section -->
+        <section id="courses" class="py-24 bg-black/10 animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold">Izaberi Svoj Put Razvoja</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-secondary">
+                        Paketi znanja dizajnirani za specifične ciljeve. Tvoja prečica do sledećeg nivoa.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+                    <article class="glass-card flex flex-col p-8">
+                        <div class="text-center flex-grow">
+                            <i class="fas fa-gavel text-4xl mb-4 text-secondary-accent" aria-hidden="true"></i>
+                            <h3 class="text-2xl font-bold mb-2">Komunikacija Autoriteta</h3>
+                            <p class="text-4xl font-bold my-4">€25</p>
+                            <ul class="space-y-3 text-sm mb-6 text-left">
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Izgradi nezaustavljivo samopouzdanje i nauči da tvoje reči imaju težinu.</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Postani osoba koju slušaju, poštuju i prate.</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uključuje interaktivnu konzolu i 100+ praktičnih trikova.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto pt-6">
+                             <button @click="openModal('Komunikacija Autoriteta', '25')" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">Naruči Kurs</button>
+                        </div>
+                    </article>
+                    <article class="popular-card glass-card flex flex-col p-8">
+                        <div class="text-center flex-grow">
+                            <i class="fas fa-rocket text-4xl mb-4 text-primary-accent" aria-hidden="true"></i>
+                            <h3 class="text-2xl font-bold mb-2">Maksimalni Uticaj</h3>
+                            <p class="text-5xl font-bold my-4">€35</p>
+                            <ul class="space-y-3 text-sm mb-6 text-left">
+                                <li class="flex items-start"><i class="fas fa-star mt-1 mr-3 text-yellow-400" aria-hidden="true"></i> <strong>Kompletan 21-dnevni sistem za majstorstvo komunikacije.</strong></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Nauči da se povežeš, ubediš i inspirišeš bilo koga.</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uključuje interaktivnu konzolu i 105+ praktičnih trikova.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto pt-6">
+                            <button @click="openModal('Maksimalni Uticaj', '35')" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">Naruči Kurs</button>
+                        </div>
+                    </article>
+                    <article class="glass-card flex flex-col p-8">
+                        <div class="text-center flex-grow">
+                            <i class="fas fa-star text-4xl mb-4 text-secondary-accent" aria-hidden="true"></i>
+                            <h3 class="text-2xl font-bold mb-2">Zakon Privlačnosti</h3>
+                            <p class="text-4xl font-bold my-4">€30</p>
+                            <ul class="space-y-3 text-sm mb-6 text-left">
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Postani svesni kreator svoje stvarnosti i magnet za čuda.</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uskladi misli i osećanja sa Univerzumom i privuci život iz snova.</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uključuje interaktivnu konzolu i 105+ praktičnih trikova.</li>
+                            </ul>
+                        </div>
+                         <div class="mt-auto pt-6">
+                            <button @click="openModal('Zakon Privlačnosti', '30')" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">Naruči Kurs</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section-->
+        <section id="testimonials" class="py-24 animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold">Ne Veruj Nama Na Reč</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-secondary">
+                        Iskustva ljudi koji su već prošli transformaciju.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="glass-card p-8">
+                        <p class="text-text-secondary text-sm mb-4">"Kurs 'Maksimalni Uticaj' mi je otvorio oči. Mislio sam da znam da komuniciram, ali tek sada vidim koliko sam propuštao. Sastanci sa klijentima su postali 10x produktivniji."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/F72585/101010?text=M" alt="Profilna slika korisnika Marko P." class="w-10 h-10 rounded-full mr-4 border-2 border-secondary-accent">
+                            <div>
+                                <h4 class="font-bold text-sm">Marko P.</h4>
+                                <p class="text-xs text-primary-accent">Preduzetnik</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-8">
+                        <p class="text-text-secondary text-sm mb-4">"Kao neko ko je uvek bio stidljiv, tehnike iz 'Komunikacije Autoriteta' su mi dale samopouzdanje koje mi je nedostajalo. Osećam se mnogo prijatnije u društvu."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/00F5D4/101010?text=J" alt="Profilna slika korisnice Jelena K." class="w-10 h-10 rounded-full mr-4 border-2 border-primary-accent">
+                            <div>
+                                <h4 class="font-bold text-sm">Jelena K.</h4>
+                                <p class="text-xs text-primary-accent">Student</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-8">
+                        <p class="text-text-secondary text-sm mb-4">"Zakon Privlačnosti mi je promenio život. Nisam verovala u 'te stvari', ali dnevne vežbe su mi donele više mira i neverovatne prilike. Preporučujem!"</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/F72585/101010?text=S" alt="Profilna slika korisnika Stefan M." class="w-10 h-10 rounded-full mr-4 border-2 border-secondary-accent">
+                            <div>
+                                <h4 class="font-bold text-sm">Stefan M.</h4>
+                                <p class="text-xs text-primary-accent">Menadžer prodaje</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section-->
+        <section id="faq" class="py-24 bg-black/10 animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold">Imate Pitanja? Imamo Odgovore.</h2>
+                </div>
+                <div x-data="{ open: 1 }" class="max-w-3xl mx-auto glass-card p-6 md:p-8">
+                    <div class="border-b border-border-color py-4">
+                        <h3 class="text-lg font-medium">
+                            <button @click="open = (open === 1 ? null : 1)" class="w-full flex justify-between items-center text-left">
+                                <span>Za koga su ovi kursevi?</span>
+                                <i class="fas transition-transform" :class="open === 1 ? 'fa-chevron-up' : 'fa-chevron-down'" aria-hidden="true"></i>
+                            </button>
+                        </h3>
+                        <div x-show="open === 1" x-collapse class="pt-3 text-sm text-text-secondary">
+                            <p>Kursevi su za sve koji žele da unaprede svoje veštine - preduzetnike, studente, menadžere, prodavce, ali i sve one koji žele da izgrade jače privatne odnose i postanu samopouzdaniji u svakodnevnim interakcijama.</p>
+                        </div>
+                    </div>
+                    <div class="border-b border-border-color py-4">
+                         <h3 class="text-lg font-medium">
+                            <button @click="open = (open === 2 ? null : 2)" class="w-full flex justify-between items-center text-left">
+                                <span>Koliko vremena dnevno je potrebno?</span>
+                                <i class="fas transition-transform" :class="open === 2 ? 'fa-chevron-up' : 'fa-chevron-down'" aria-hidden="true"></i>
+                            </button>
+                        </h3>
+                        <div x-show="open === 2" x-collapse class="pt-3 text-sm text-text-secondary">
+                            <p>Svaka lekcija je dizajnirana da zahteva oko 15-20 minuta vašeg vremena za teoriju, plus vreme koje posvetite praktičnoj primeni tokom dana. Fleksibilno je i možete ga prilagoditi svom rasporedu.</p>
+                        </div>
+                    </div>
+                    <div class="py-4">
+                        <h3 class="text-lg font-medium">
+                            <button @click="open = (open === 3 ? null : 3)" class="w-full flex justify-between items-center text-left">
+                                <span>Šta ako mi se kurs ne svidi?</span>
+                                <i class="fas transition-transform" :class="open === 3 ? 'fa-chevron-up' : 'fa-chevron-down'" aria-hidden="true"></i>
+                            </button>
+                        </h3>
+                        <div x-show="open === 3" x-collapse class="pt-3 text-sm text-text-secondary">
+                             <p>Nudimo bezuslovnu garanciju povrata novca u roku od 14 dana. Ako iz bilo kog razloga niste zadovoljni, samo nam se javite i vratićemo vam kompletan iznos, bez postavljanja pitanja.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border-color py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-bold tracking-wider text-gradient mb-4">ASCENDRIX</p>
+            <div class="flex items-center justify-center space-x-6 mb-4">
+                <a href="https://www.tiktok.com/@ascendrixv1.0?_t=ZM-9007bNPC5KG&_r=1" target="_blank" class="text-gray-400 hover:text-white transition-colors text-2xl"><span class="sr-only">TikTok</span><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+            </div>
+            <p class="text-sm text-gray-500">&copy; 2025 ASCENDRIX. Sva prava zadržana.</p>
+        </div>
+    </footer>
+    
+    <!-- Payment Modal -->
+    <div x-show="modalOpen" x-cloak
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+         role="dialog" aria-modal="true" :aria-labelledby="modal-title">
+        
+        <div @click.away="modalOpen = false"
+             x-show="modalOpen"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 transform scale-95"
+             x-transition:enter-end="opacity-100 transform scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 transform scale-100"
+             x-transition:leave-end="opacity-0 transform scale-95"
+             class="glass-card w-full max-w-lg p-8 relative">
+             
+            <button @click="modalOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <span class="sr-only">Zatvori prozor</span>
+                <i class="fas fa-times text-2xl" aria-hidden="true"></i>
+            </button>
+            
+            <h3 id="modal-title" class="text-2xl font-bold text-center mb-6">Uputstvo za Naručivanje</h3>
+            
+            <div class="text-sm text-text-secondary space-y-4">
+                <p>Pratite sledeće korake da biste uspešno naručili kurs "<strong x-text="selectedCourseName" class="text-primary-accent"></strong>".</p>
+                
+                <div class="border border-border-color rounded-lg p-4">
+                    <p class="font-bold text-text-primary mb-2">Korak 1: Podaci za uplatu</p>
+                    <p>Posetite najbližu poštu, banku ili menjačnicu koja pruža usluge Western Union-a i izvršite uplatu koristeći sledeće podatke:</p>
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-text-primary">
+                        <li><strong>Ime primaoca:</strong> Nikola</li>
+                        <li><strong>Prezime primaoca:</strong> Spiridonović</li>
+                        <li><strong>Grad:</strong> Beograd</li>
+                        <li><strong>Država:</strong> Srbija</li>
+                        <li><strong>Iznos za uplatu:</strong> <span x-text="selectedCoursePrice" class="font-bold"></span> EUR (u dinarskoj protivvrednosti)</li>
+                    </ul>
+                </div>
+                
+                <div class="border border-border-color rounded-lg p-4">
+                    <p class="font-bold text-text-primary mb-2">Korak 2: Potvrda narudžbine</p>
+                    <p>Nakon uplate, dobićete potvrdu sa **kontrolnim brojem transfera novca (MTCN)**. Sačuvajte ovaj broj.</p>
+                    <p class="mt-2">Kliknite na dugme ispod kako biste nam poslali email. U telu email-a koji se otvori, **unesite MTCN broj** na označeno mesto.</p>
+                </div>
+                
+                <p class="text-xs text-center pt-2">Kurs će vam biti isporučen na email adresu sa koje pošaljete potvrdu u roku od 24 sata od provere uplate.</p>
+            </div>
+            
+            <div class="mt-8">
+                <a :href="generateMailtoLink()" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">
+                    <i class="fas fa-envelope mr-2" aria-hidden="true"></i> Potvrdi Narudžbinu Emailom
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js" defer></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const courseData = [
-                { day: 1, title: 'Rapport: Most ka Podsvesti', week: 1 },
-                { day: 2, title: 'Mirroring: Fizičko Usklađivanje', week: 1 },
-                { day: 3, title: 'Cross-Mirroring: Suptilna Veza', week: 1 },
-                { day: 4, title: 'Usklađivanje Glasa i Disanja', week: 1 },
-                { day: 5, title: 'Vođenje: Ples Uticaja', week: 1 },
-                { day: 6, title: 'Kalibracija: Čitanje Podsvesti', week: 1 },
-                { day: 7, title: 'Refleksija: Majstor Rapport-a', week: 1 },
-                { day: 8, title: 'Milton Model: Hipnotički Jezik', week: 2 },
-                { day: 9, title: 'Milton Model: Brisanja i Generalizacije', week: 2 },
-                { day: 10, title: 'Milton Model: Čitanje Uma', week: 2 },
-                { day: 11, title: 'Ugrađene Komande i Pitanja', week: 2 },
-                { day: 12, title: 'Moć Metafore i Priče', week: 2 },
-                { day: 13, title: 'Dvosmislene Poruke', week: 2 },
-                { day: 14, title: 'Refleksija: Jezička Magija', week: 2 },
-                { day: 15, title: 'Sidrenje: Kreiranje Okidača', week: 3 },
-                { day: 16, title: 'Prekidanje Obrasca (Pattern Interrupt)', week: 3 },
-                { day: 17, title: 'Reframing: Promena Značenja', week: 3 },
-                { day: 18, title: 'Strategije Ubeđivanja', week: 3 },
-                { day: 19, title: 'Uticaj na Grupu', week: 3 },
-                { day: 20, title: 'Etički Okviri Uticaja', week: 3 },
-                { day: 21, title: 'Integracija: Fluidni Uticaj', week: 3 },
-            ];
-            
-            const contentArea = document.getElementById('content-area');
-            const navigation = document.getElementById('navigation');
-            const menuToggle = document.getElementById('menu-toggle');
-            const sidebar = document.getElementById('sidebar');
-            const sidebarOverlay = document.getElementById('sidebar-overlay');
-            const messageBox = document.getElementById('message-box');
-
-            function getProgress() {
-                return JSON.parse(localStorage.getItem('influenceCourseProgress')) || {};
-            }
-
-            function saveProgress(progress) {
-                localStorage.setItem('influenceCourseProgress', JSON.stringify(progress));
-                updateProgressVisuals();
-            }
-            
-            function getJournal() {
-                return JSON.parse(localStorage.getItem('influenceCourseJournal')) || {};
-            }
-
-            function saveJournalEntry(day, text) {
-                const journal = getJournal();
-                journal[day] = text;
-                localStorage.setItem('influenceCourseJournal', JSON.stringify(journal));
-            }
-
-            function showMessage(message, duration = 3000) {
-                messageBox.textContent = message;
-                messageBox.classList.add('show');
-                setTimeout(() => {
-                    messageBox.classList.remove('show');
-                }, duration);
-            }
-
-            function navigate(targetId, fromCalendar = false) {
-                document.querySelectorAll('.module-content').forEach(div => div.classList.add('hidden'));
-                const targetDiv = document.getElementById(targetId);
-                if (targetDiv) {
-                    targetDiv.classList.remove('hidden');
-                } else {
-                    document.getElementById('uvod').classList.remove('hidden');
-                }
-
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.dataset.target === targetId) {
-                        link.classList.add('active');
-                    }
-                });
+        function appData() {
+            return {
+                mobileMenuOpen: false,
+                modalOpen: false,
+                selectedCourseName: '',
+                selectedCoursePrice: '',
                 
-                if (fromCalendar) {
-                    const day = targetId.split('-')[1];
-                    const journal = getJournal();
-                    const textarea = document.getElementById(`dnevnik-dan-${day}`);
-                    if (textarea && journal[day]) {
-                        textarea.value = journal[day];
-                    }
-                }
-
-                window.location.hash = targetId;
-                window.scrollTo(0, 0);
-            }
-            
-            function updateProgressVisuals() {
-                const progress = getProgress();
-                document.querySelectorAll('.nav-link[data-day]').forEach(link => {
-                    const day = link.dataset.day;
-                    if (progress[day]) {
-                        link.classList.add('completed');
-                    } else {
-                        link.classList.remove('completed');
-                    }
-                });
-                document.querySelectorAll('.calendar-day[data-day]').forEach(dayDiv => {
-                    const day = dayDiv.dataset.day;
-                    if (progress[day]) {
-                        dayDiv.classList.add('completed');
-                    } else {
-                        dayDiv.classList.remove('completed');
-                    }
-                });
-            }
-
-            function buildNavigation() {
-                const weekContainers = document.querySelectorAll('.nav-group > div');
-                courseData.forEach(dayInfo => {
-                    const link = document.createElement('a');
-                    link.href = `#dan-${dayInfo.day}`;
-                    link.dataset.target = `dan-${dayInfo.day}`;
-                    link.dataset.day = dayInfo.day;
-                    link.className = 'nav-link text-sm';
-                    link.innerHTML = `Dan ${dayInfo.day}: ${dayInfo.title} <i class="fas fa-check-circle"></i>`;
-                    weekContainers[dayInfo.week - 1].appendChild(link);
-                });
-            }
-
-            function createCalendar() {
-                const calendarContainer = document.createElement('div');
-                calendarContainer.id = 'calendar-container';
-                calendarContainer.className = 'glass-effect';
+                openModal(name, price) {
+                    this.selectedCourseName = name;
+                    this.selectedCoursePrice = price;
+                    this.modalOpen = true;
+                },
                 
-                let calendarHTML = `
-                    <div class="calendar-header text-center">
-                        <h3 class="text-3xl font-bold kurs-main-text">Tvoj Put ka Moći Komunikacije</h3>
-                        <p class="kurs-secondary-text mt-2 mb-6">Klikni na dan da započneš lekciju. Završeni dani će pozeleneti.</p>
-                    </div>
-                    <div class="calendar-grid">
-                `;
+                generateMailtoLink() {
+                    const subject = `Narudzbina kursa: ${this.selectedCourseName}`;
+                    const body = `Zdravo,\n\nŽelim da naručim kurs "${this.selectedCourseName}".\n\nUplatu sam izvršio/la preko Western Union-a.\n\nKontrolni broj transfera novca (MTCN) je: [ OVDE UMETNITE KONTROLNI BROJ ]\n\nLep pozdrav,\n[ VASE IME I PREZIME ]`;
+                    return `mailto:nklpupin@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                },
 
-                for (let i = 1; i <= 21; i++) {
-                    calendarHTML += `<div class="calendar-day glass-effect" data-day="${i}" data-target="dan-${i}">${i}</div>`;
-                }
+                init() {
+                    // ISPRAVKA: Uklonjen 'DOMContentLoaded' listener. 
+                    // Funkcije se sada pozivaju direktno, što je ispravno 
+                    // jer x-init čeka da DOM bude spreman.
+                    this.initGsapAnimations();
+                    this.init3DBackground();
+                },
 
-                calendarHTML += `</div>`;
-                calendarContainer.innerHTML = calendarHTML;
-                return calendarContainer;
-            }
-
-            function createIntroPage() {
-                const introDiv = document.createElement('div');
-                introDiv.id = 'uvod';
-                introDiv.className = 'module-content';
-                introDiv.innerHTML = `
-                    <header class="mb-10">
-                        <h2 class="text-4xl md:text-5xl font-bold kurs-main-text">Kod Uticaja</h2>
-                        <p class="kurs-secondary-text mt-4 max-w-3xl">Dobrodošao, Majstore Uticaja. Pred tobom je 21 dan dekonstrukcije ljudske komunikacije. Ovde nećemo pričati o motivaciji i liderstvu. Ovde ćemo učiti konkretne, moćne tehnike koje deluju na podsvesnom nivou. Rapport, Mirroring, Milton Model - ovo su alati kojima se služe najveći komunikatori sveta.</p>
-                        <p class="kurs-secondary-text mt-2 max-w-3xl">Ovaj kurs je dizajniran da ti da hiruršku preciznost u komunikaciji. Naučićeš da gradiš duboke veze za nekoliko minuta, da koristiš jezik na način koji zaobilazi otpor i inspiriše akciju. Ovo znanje nosi veliku odgovornost. Koristi ga mudro. Krenimo.</p>
-                    </header>
-                `;
-                
-                const calendar = createCalendar();
-                introDiv.appendChild(calendar);
-
-                introDiv.innerHTML += `
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-                        <div class="p-6 rounded-xl glass-effect">
-                            <h4 class="font-bold text-xl mb-2 kurs-main-text flex items-center"><i class="fas fa-people-arrows mr-3 text-2xl kurs-accent"></i> Nedelja 1: Nesvesna Komunikacija</h4>
-                            <p class="kurs-secondary-text text-sm">Učimo jezik tela i glasa. Savladaćemo rapport, mirroring, usklađivanje i vođenje - temelj svake duboke konekcije i uticaja.</p>
-                        </div>
-                        <div class="p-6 rounded-xl glass-effect">
-                            <h4 class="font-bold text-xl mb-2 kurs-main-text flex items-center"><i class="fas fa-brain mr-3 text-2xl kurs-accent"></i> Nedelja 2: Umetnost Jezika</h4>
-                            <p class="kurs-secondary-text text-sm">Ulazimo u Milton Model. Dekodiramo hipnotičke jezičke obrasce, ugrađene komande i metafore koje ti daju moć da oblikuješ percepciju i inspirišeš druge.</p>
-                        </div>
-                        <div class="p-6 rounded-xl glass-effect">
-                            <h4 class="font-bold text-xl mb-2 kurs-main-text flex items-center"><i class="fas fa-chess-king mr-3 text-2xl kurs-accent"></i> Nedelja 3: Napredne Strategije</h4>
-                            <p class="kurs-secondary-text text-sm">Spajamo sve u celinu. Učimo sidrenje, prekidanje obrazaca i reframing. Transformisaćemo ove tehnike u tvoj prirodni način komunikacije.</p>
-                        </div>
-                    </div>
-                `;
-                contentArea.appendChild(introDiv);
-
-                document.querySelectorAll('.calendar-day').forEach(day => {
-                    day.addEventListener('click', () => {
-                        const targetId = day.dataset.target;
-                        navigate(targetId, true);
+                initGsapAnimations() {
+                    if (typeof gsap === 'undefined') { 
+                        console.error("GSAP library not loaded.");
+                        return;
+                    }
+                    gsap.registerPlugin(ScrollTrigger);
+                    
+                    document.querySelectorAll('.animated-section').forEach(section => {
+                        gsap.from(section.children, {
+                            scrollTrigger: {
+                                trigger: section,
+                                start: 'top 80%',
+                                end: 'bottom 20%',
+                                toggleActions: 'play none none none'
+                            },
+                            opacity: 0,
+                            y: 50,
+                            duration: 1,
+                            ease: 'power3.out',
+                            stagger: 0.2
+                        });
                     });
-                });
-            }
-            
-            function createJournalPage() {
-                const journalDiv = document.createElement('div');
-                journalDiv.id = 'dnevnik';
-                journalDiv.className = 'module-content hidden';
-                journalDiv.innerHTML = `
-                    <header class="mb-10">
-                        <h2 class="text-4xl font-bold kurs-main-text">Tvoj Dnevnik Uticaja</h2>
-                        <p class="kurs-secondary-text mt-2">Ovde su svi tvoji sačuvani unosi. Refleksija je gorivo za rast.</p>
-                    </header>
-                    <div id="journal-entries" class="space-y-6"></div>
-                `;
-                contentArea.appendChild(journalDiv);
-            }
+                },
 
-            function renderJournalEntries() {
-                const container = document.getElementById('journal-entries');
-                if (!container) return;
-                const journal = getJournal();
-                container.innerHTML = '';
-                
-                const sortedDays = Object.keys(journal).map(Number).sort((a, b) => a - b);
-
-                if (sortedDays.length === 0) {
-                    container.innerHTML = '<div class="kurs-secondary-text text-center p-8 glass-effect rounded-lg">Tvoj dnevnik je trenutno prazan. Počni sa vežbama i sačuvaj svoje refleksije!</div>';
-                    return;
-                }
-
-                sortedDays.forEach(day => {
-                    const entryText = journal[day];
-                    if (entryText) {
-                        const dayInfo = courseData.find(d => d.day == day);
-                        const entryDiv = document.createElement('div');
-                        entryDiv.className = 'p-6 rounded-xl glass-effect';
-                        entryDiv.innerHTML = `
-                            <h3 class="text-2xl font-bold kurs-main-text mb-2">Dan ${day}: ${dayInfo.title}</h3>
-                            <div class="kurs-secondary-text whitespace-pre-wrap">${entryText.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
-                        `;
-                        container.appendChild(entryDiv);
+                init3DBackground() {
+                    if (typeof THREE === 'undefined') {
+                        console.error("Three.js library not loaded.");
+                        return;
                     }
-                });
-            }
-            
-            function createInfographicGrid(cards) {
-                if (!cards || cards.length === 0) return '';
-                
-                let gridColsClass = 'md:grid-cols-1';
-                if (cards.length === 2) {
-                    gridColsClass = 'md:grid-cols-2';
-                } else if (cards.length >= 3) {
-                    gridColsClass = 'md:grid-cols-3';
-                }
-                
-                let cardsHTML = cards.map(card => `
-                    <div class="infographic-card glass-effect">
-                        <i class="fas ${card.icon} icon"></i>
-                        <h4>${card.title}</h4>
-                        <p class="text-sm kurs-secondary-text">${card.text}</p>
-                    </div>
-                `).join('');
 
-                return `
-                    <div class="infographic-container mt-6">
-                         <div class="grid grid-cols-1 ${gridColsClass} gap-4">
-                            ${cardsHTML}
-                        </div>
-                    </div>
-                `;
-            }
+                    let scene, camera, renderer, particles, mouseX = 0, mouseY = 0;
+                    let animationId = null;
+                    const canvas = document.getElementById('bg-canvas');
+                    if (!canvas) return;
 
-            function createDayPage(dayData) {
-                const dayDiv = document.createElement('div');
-                dayDiv.id = `dan-${dayData.day}`;
-                dayDiv.className = 'module-content hidden';
-                
-                const content = getDayContent(dayData.day);
-                
-                const uvodInfographics = createInfographicGrid(content.uvod.infographics);
+                    function init() {
+                        scene = new THREE.Scene();
+                        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                        camera.position.z = 3.5;
 
-                let podnasloviHTML = content.podnaslovi.map(p => `
-                    <div class="accordion-item glass-effect rounded-xl overflow-hidden">
-                        <button class="accordion-trigger w-full text-left p-4 md:p-6 flex justify-between items-center">
-                            <h4 class="text-xl font-bold kurs-main-text flex items-center"><i class="fas ${p.icon} mr-3 kurs-accent"></i> ${p.naslov}</h4>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="p-4 md:p-6 pt-0 border-t border-[var(--border-color)]">
-                                ${p.tekst}
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
+                        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+                        renderer.setPixelRatio(window.devicePixelRatio);
+                        renderer.setSize(window.innerWidth, window.innerHeight);
 
-                dayDiv.innerHTML = `
-                    <header class="mb-8 text-center border-b border-b-[var(--border-color)] pb-6">
-                        <p class="text-sm kurs-accent font-semibold tracking-widest uppercase">Nedelja ${dayData.week} &bull; Dan ${dayData.day}</p>
-                        <h2 class="text-3xl md:text-4xl font-bold kurs-main-text mt-2">${dayData.title}</h2>
-                    </header>
+                        const particleCount = 7000;
+                        const positions = new Float32Array(particleCount * 3);
+                        const colors = new Float32Array(particleCount * 3);
+                        const color1 = new THREE.Color(0x00F5D4);
+                        const color2 = new THREE.Color(0xF72585);
+
+                        for (let i = 0; i < particleCount; i++) {
+                            positions[i * 3] = (Math.random() - 0.5) * 10;
+                            positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+                            positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+                            const mixedColor = color1.clone().lerp(color2, Math.random());
+                            colors[i * 3] = mixedColor.r;
+                            colors[i * 3 + 1] = mixedColor.g;
+                            colors[i * 3 + 2] = mixedColor.b;
+                        }
+
+                        const geometry = new THREE.BufferGeometry();
+                        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                        const material = new THREE.PointsMaterial({ size: 0.015, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true, opacity: 0.8 });
+                        particles = new THREE.Points(geometry, material);
+                        scene.add(particles);
+                    }
+
+                    function animate() {
+                        animationId = requestAnimationFrame(animate);
+                        const time = Date.now() * 0.0001;
+                        if (particles) {
+                           particles.rotation.x = time * 0.25;
+                           particles.rotation.y = time * 0.5;
+                        }
+                        camera.position.x += (mouseX - camera.position.x) * 0.01;
+                        camera.position.y += (-mouseY - camera.position.y) * 0.01;
+                        camera.lookAt(scene.position);
+                        renderer.render(scene, camera);
+                    }
+
+                    function onWindowResize() {
+                        camera.aspect = window.innerWidth / window.innerHeight;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                    }
                     
-                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-8">
-                        <div class="lg:col-span-3 space-y-4">
-                            <!-- UVODNA SEKCIJA -->
-                            <div class="p-6 rounded-xl glass-effect">
-                                <h3 class="text-2xl font-bold kurs-main-text mb-2 flex items-center"><i class="fas fa-book-reader mr-3 kurs-accent"></i> Uvod: ${content.uvod.naslov}</h3>
-                                ${content.uvod.tekst}
-                                ${uvodInfographics}
-                            </div>
-                            
-                            <!-- PODNASLOVI (Harmonika) -->
-                            ${podnasloviHTML}
-                        </div>
+                    function onDocumentMouseMove(event) {
+                        mouseX = (event.clientX - window.innerWidth / 2) / 500;
+                        mouseY = (event.clientY - window.innerHeight / 2) / 500;
+                    }
 
-                        <div class="lg:col-span-2 space-y-4">
-                            <!-- DNEVNIK I STATUS -->
-                            <div class="accordion-item glass-effect rounded-xl overflow-hidden">
-                                <button class="accordion-trigger w-full text-left p-4 md:p-6 flex justify-between items-center">
-                                    <h3 class="text-xl font-bold kurs-main-text flex items-center"><i class="fas fa-feather-alt mr-3 kurs-accent"></i> Dnevnik Refleksije</h3>
-                                    <i class="fas fa-chevron-down accordion-icon"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <div class="p-4 md:p-6 pt-0 border-t border-[var(--border-color)]">
-                                        ${content.dnevnikPitanja}
-                                        <textarea id="dnevnik-dan-${dayData.day}" class="mt-4" placeholder="Upiši svoje misli i refleksije ovde..."></textarea>
-                                        <button class="kurs-button mt-4 w-full" data-day="${dayData.day}" onclick="handleSaveJournal(this)">
-                                            <i class="fas fa-save mr-2"></i> Sačuvaj u Dnevnik
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-6 rounded-xl glass-effect text-center">
-                                <h3 class="text-2xl font-bold kurs-main-text mb-4">Status Dana</h3>
-                                <button class="kurs-button w-full" data-day="${dayData.day}" onclick="handleMarkAsComplete(this)">
-                                    <i class="fas fa-check mr-2"></i> Označi kao završeno
-                                </button>
-                                <p class="text-xs kurs-secondary-text mt-2">Označi ovaj dan kao završen da bi pratio svoj napredak.</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                contentArea.appendChild(dayDiv);
-            }
-            
-            function createAllPages() {
-                createIntroPage();
-                createJournalPage();
-                courseData.forEach(dayInfo => createDayPage(dayInfo));
-            }
-
-            window.handleSaveJournal = (button) => {
-                const day = button.dataset.day;
-                const textarea = document.getElementById(`dnevnik-dan-${day}`);
-                if (textarea.value.trim() !== '') {
-                    saveJournalEntry(day, textarea.value);
-                    showMessage(`Zapis za Dan ${day} je sačuvan!`);
-                } else {
-                    showMessage('Dnevnik je prazan. Upišite nešto pre čuvanja.', 3000);
-                }
-            };
-
-            window.handleMarkAsComplete = (button) => {
-                const day = button.dataset.day;
-                const progress = getProgress();
-                progress[day] = true;
-                saveProgress(progress);
-                showMessage(`Dan ${day} je označen kao završen. Odličan posao!`);
-            };
-
-            buildNavigation();
-            createAllPages();
-            
-            navigation.addEventListener('click', (e) => {
-                const link = e.target.closest('a.nav-link');
-                if (link) {
-                    e.preventDefault();
-                    const targetId = link.dataset.target;
-                    
-                    if (targetId === 'dnevnik') {
-                        renderJournalEntries();
-                    } else if (targetId && targetId.startsWith('dan-')) {
-                        const day = targetId.split('-')[1];
-                        const journal = getJournal();
-                        const textarea = document.getElementById(`dnevnik-dan-${day}`);
-                        if (textarea && journal[day]) {
-                            textarea.value = journal[day];
+                    function handleVisibilityChange() {
+                        if (document.hidden) {
+                            cancelAnimationFrame(animationId);
+                            animationId = null;
+                        } else {
+                            if (!animationId) {
+                                animate();
+                            }
                         }
                     }
-                    navigate(targetId);
-                    
-                    if (window.innerWidth < 768) {
-                        sidebar.classList.add('-translate-x-full');
-                        sidebarOverlay.classList.add('hidden');
-                    }
+
+                    init();
+                    animate();
+                    window.addEventListener('resize', onWindowResize);
+                    document.addEventListener('mousemove', onDocumentMouseMove);
+                    document.addEventListener("visibilitychange", handleVisibilityChange);
                 }
-            });
-
-            contentArea.addEventListener('click', e => {
-                const trigger = e.target.closest('.accordion-trigger');
-                if (!trigger) return;
-
-                const item = trigger.closest('.accordion-item');
-                const content = trigger.nextElementSibling;
-
-                item.classList.toggle('active');
-
-                if (item.classList.contains('active')) {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                } else {
-                    content.style.maxHeight = null;
-                }
-            });
-
-            function toggleMenu() {
-                sidebar.classList.toggle('-translate-x-full');
-                sidebarOverlay.classList.toggle('hidden');
-            }
-
-            menuToggle.addEventListener('click', toggleMenu);
-            sidebarOverlay.addEventListener('click', toggleMenu);
-
-            updateProgressVisuals();
-            const initialTarget = window.location.hash ? window.location.hash.substring(1) : 'uvod';
-            navigate(initialTarget);
-            if (initialTarget === 'dnevnik') renderJournalEntries();
-        });
-
-        function getDayContent(day) {
-            const content = { 
-                uvod: { naslov: '', tekst: '', infographics: [] },
-                podnaslovi: [],
-                dnevnikPitanja: '' 
             };
-            const dayNum = parseInt(day);
-            switch(dayNum) {
-                 case 1:
-                    content.uvod = {
-                        naslov: 'Tajni Sastojak Povezivanja',
-                        tekst: `<p class="kurs-secondary-text">Dobrodošao na početak putovanja! Danas učimo osnovu svega – <strong>Rapport</strong>. To je fensi reč za stvaranje duboke, iskrene veze. Zamisli to kao nevidljivi most poverenja između tebe i druge osobe. To je onaj super osećaj kad sa nekim "klikneš" i priča teče sama od sebe. Bez tog mosta, i najbolje reči se gube. Sa njim, vrata za uticaj su ti širom otvorena. Spreman da naučiš kako se gradi?</p>`,
-                        infographics: [
-                            { icon: 'fa-handshake', title: 'Harmonija', text: 'Stvori osećaj da ste "na istoj strani", čak i ako se ne slažete.' },
-                            { icon: 'fa-user-friends', title: 'Sličnost', text: 'Ljudi instinktivno veruju onima koji su im slični.' },
-                            { icon: 'fa-shield-alt', title: 'Poverenje', text: 'Veza je temelj na kojem se gradi svaki dugoročni uticaj.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Stvarno Rapport?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">Većina ljudi misli da je komunikacija samo razmena reči. Greška! Prave odluke donosimo "iz stomaka", a onda ih pravdamo mozgom. Rapport je veština da pričaš direktno sa tim "stomakom", sa delom mozga koji oseća, a ne samo misli. To je kad nekome, bez reči, pošalješ poruku: "Hej, kapiram te. Slični smo. Na sigurnom si sa mnom." Pre nego što i počneš da ubeđuješ nekoga, sa rapportom si već na pola puta do cilja jer si srušio zidove odbrane.</p>' },
-                        { naslov: 'Kako se "Klikne" sa Ljudima?', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">Ne moraš da se slažeš sa svime što neko kaže da bi stvorio vezu. Ključ je da pokažeš da <strong>razumeš</strong> zašto neko misli to što misli. To se zove <strong>validacija</strong>. Slušaj da bi razumeo, a ne da bi smislio šta ćeš sledeće reći. Traži iskrene sličnosti – možda navijate za isti klub, volite istu muziku ili mrzite gužvu u saobraćaju. Pokaži da poštuješ njihov film u glavi, i oni će te rado pustiti u njega.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Kris Vos, bivši glavni FBI pregovarač za taoce, priča kako je satima sedeo sa otmičarem u potpunoj tišini, samo preslikavajući njegovo disanje. Nije nudio rešenja, nije se raspravljao. Samo je bio prisutan i usklađen. Nakon nekoliko sati tihe borbe za poverenje, otmičar je počeo da priča i na kraju se predao. Vos kaže: "Veza nije bila u onome što sam rekao, već u tome što sam pokazao da ga razumem bez reči."</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas vežbamo da svesno tražimo ono što nas spaja sa drugima, umesto ono što nas razdvaja.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Mentalna Vežba - Lov na Sličnosti:</strong> Tokom dana, u svakoj interakciji, postavi sebi misiju: "Pronaći ću tri zajedničke stvari". To može biti bilo šta: sličan sat, ista marka telefona, slaganje oko toga da je napolju toplo. Cilj je da istreniraš mozak da automatski traži sličnosti, a ne razlike.</li><li><strong>Aktivni Zadatak - Moć Razumevanja:</strong> U jednom razgovoru, pre nego što izneseš svoje mišljenje, svesno upotrebi frazu koja pokazuje razumevanje. Ne "Da, ali...", već nešto poput: "Potpuno kapiram zašto tako misliš..." ili "Ima smisla to što kažeš iz tvoje perspektive...". Tek nakon što si iskreno potvrdio njihovu poziciju, iznesi svoju. Gledaj kako se osoba otvara.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje si konkretne sličnosti pronašao sa ljudima danas?</li><li>Opiši tačno kako je vežba razumevanja uticala na tok razgovora.</li><li>Koji unutrašnji glas te sprečava da prirodno tražiš sličnosti?</li></ul>`;
-                    break;
-                case 2:
-                    content.uvod = {
-                        naslov: 'Jezik Tela: Tvoje Ogledalo',
-                        tekst: `<p class="kurs-secondary-text">Danas učimo jednu od najmoćnijih tehnika za stvaranje veze - <strong>Mirroring</strong>, ili preslikavanje. To je fino usklađivanje tvog govora tela sa osobom sa kojom pričaš. U našem mozgu postoje "neuroni ogledala" koji se pale kada gledamo nekog drugog, i čine da osećamo isto što i oni. Kada svesno preslikavaš nekoga, ti bukvalno hakuješ njihov mozak da oseti duboku, podsvesnu vezu sa tobom.</p>`,
-                        infographics: [
-                            { icon: 'fa-clone', title: 'Govor Tela', text: 'Diskretno preslikaj držanje, gestikulaciju i izraze lica.' },
-                            { icon: 'fa-user-astronaut', title: 'Energija', text: 'Uskladi nivo svoje energije sa sagovornikom, bilo da je visoka ili niska.' },
-                            { icon: 'fa-brain', title: 'Podsvesna Veza', text: 'Mozak dobija poruku: "Ovaj lik je kao ja, siguran je, mogu mu verovati."' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Fizičko Preslikavanje?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">Preslikavanje je mnogo više od proste imitacije. Imitacija je kad nekog majmunišeš i to je uvredljivo. Preslikavanje je suptilno usklađivanje sa neverbalnim signalima druge osobe – opštim držanjem tela, dominantnim gestovima, pa čak i izrazima lica. Cilj nije da budeš nečiji odraz u ogledalu kao robot, već da stvoriš osećaj harmonije. To je kao ples u kojem pratiš partnera, ali sa malim zakašnjenjem, da ne izgleda kao da ga kopiraš.</p>' },
-                        { naslov: 'Tehnike Suptilnog Preslikavanja', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">Ključ je u <strong>suptilnosti</strong> i kašnjenju od 3-5 sekundi. Ako osoba prekrsti noge, ti posle nekoliko sekundi prekrsti ruke. Ako se nagne napred da nešto naglasi, ti se posle nekog vremena takođe nagni napred da pokažeš da te zanima. Ako se nasmeje, uzvrati osmehom. Usklađuješ energiju i opšti "oblik" tela, ne svaki pokret. Svesni um ovo ne primećuje, ali podsvest dobija jasnu poruku: "Mi smo isti tim."</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Bil Klinton je bio poznat kao majstor povezivanja. Analize njegovih sastanaka pokazuju da je konstantno preslikavao sagovornike. Kada je pričao sa energičnim studentom, i sam bi postao življi. Kada je bio sa starijim, smirenim državnikom, njegov govor tela bi postao odmeren. Nije glumio - on je instinktivno osećao da je usklađivanje ključ za konekciju, što mu je omogućilo da pridobije ljude iz svih sfera života.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas postajemo detektivi govora tela sa jasnim zadatkom.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba posmatranja - Detektiv Komunikacije:</strong> Otiđi u kafić ili park sa jednim ciljem: da budeš "detektiv komunikacije". Posmatraj parove ili grupe ljudi. Ko se naginje jedno ka drugom? Ko ima slične gestove? Pokušaj da na skali od 1-5 oceniš koliko su povezani, samo na osnovu govora tela. Ne slušaj reči, samo "čitaj" tela.</li><li><strong>Aktivni Zadatak - Usklađivanje Poze:</strong> U jednom neobaveznom razgovoru, fokusiraj se samo na jednu stvar: da uskladiš opštu pozu tela. Ako sagovornik sedi zavaljeno i opušteno, dozvoli i sebi da se opustiš u stolici. Ako stoji uspravno i energično, ispravi i ti svoja leđa. Ne preslikavaj svaki pokret, samo generalnu "energiju" poze. Obrati pažnju kako se ti osećaš dok ovo radiš.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Šta si konkretno primetio posmatrajući druge ljude? Opiši jedan par za koji si mislio da je povezan.</li><li>Kako si se osećao dok si usklađivao pozu? Da li je bilo teško ili prirodno?</li><li>Koliko si svestan svog govora tela u toku dana, na skali od 1 do 10?</li></ul>`;
-                    break;
-                case 3:
-                    content.uvod = {
-                        naslov: 'Unakrsno Preslikavanje: Nindža Nivo',
-                        tekst: `<p class="kurs-secondary-text">Dobrodošao na napredni nivo preslikavanja. <strong>Unakrsno preslikavanje</strong> je tehnika koja te podiže na nivo majstora. Umesto da preslikavaš isti pokret (on počeše nos, vi počešete nos), ti preslikavaš pokret jednog dela tela drugim delom tela, ili još bolje, samo ritam pokreta. Ovo je skoro nemoguće provaliti svesno, ali podsvest to registruje kao najdublji znak da ste potpuno usklađeni.</p>`,
-                        infographics: [
-                            { icon: 'fa-random', title: 'Preklapanje', text: 'Ako on dodirne bradu, ti posle par sekundi popraviš sat na ruci.' },
-                            { icon: 'fa-sync-alt', title: 'Preslikavanje Ritma', text: 'Preslikaj ritam nečijeg govora ili tapkanja prstima.' },
-                            { icon: 'fa-theater-masks', title: 'Apsolutna Suptilnost', text: 'Cilj je da bude potpuno nevidljivo za svesni um.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Unakrsno Preslikavanje?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">Ovo je tehnika gde prepoznaješ ritam ili obrazac u ponašanju druge osobe i preslikavaš ga potpuno drugačijim delom tela. Primer: Osoba tapka prstima po stolu u određenom ritmu, a ti diskretno počneš da klatiš stopalo u istom ritmu. Osoba brzo trepće, a ti u istom ritmu blago klimaš glavom. Cilj je sinhronizacija ritmova, ne pokreta. To je kao da vaši nervni sistemi vode tajni razgovor koji niko drugi ne čuje.</p>' },
-                        { naslov: 'Tehnika Ritmičkog Usklađivanja', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">Prvo, moraš da se smiriš i pažljivo posmatraš sagovornika. Prestani da razmišljaš o tome šta ćeš reći i samo gledaj. Traži ponavljajuće obrasce: treptanje, klimanje glavom, disanje, tapkanje, ritam govora... Kada uočiš ritam, diskretno ga preuzmi nekim svojim malim pokretom. Ovo stvara izuzetno dubok nivo veze jer komunicira potpunu usklađenost na najdubljem nivou.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Poznati mentalista Derren Brown često koristi ovu tehniku. U jednom TV specijalu, razgovarao je sa čovekom koji je neprestano tapkao olovkom. Brown je počeo da u istom ritmu blago pomera svoj palac preko kažiprsta. Nakon par minuta, oduzeo je čoveku olovku. Čovek se nije bunio, ali je nesvesno počeo da pomera prste u istom ritmu kao i Brown, tražeći "izgubljeni" ritam. Brown je preuzeo kontrolu nad njegovim unutrašnjim ritmom.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas vežbamo prepoznavanje i preslikavanje nevidljivih ritmova.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba slušanja ritma - Muzika Govora:</strong> Pusti bilo koji intervju na YouTube-u. Zatvori oči i slušaj samo ritam govora, ne reči. Da li je brz, iseckan? Ili spor, melodičan? Pokušaj da prstima po stolu tapkate u ritmu koji čujete. Cilj je da istreniraš sluh za obrasce i muziku u komunikaciji.</li><li><strong>Aktivni Zadatak - Ritmičko Preslikavanje:</strong> U jednom razgovoru, identifikuj jedan ponavljajući, ritmički pokret kod sagovornika (tapkanje olovkom, pomeranje stopala, treptanje). Tvoj zadatak je da taj ritam preslikaš nekim svojim, potpuno drugačijim i skrivenim pokretom (npr. ritmičko stiskanje mišića u nozi, ili tiho disanje u istom ritmu). Cilj je da osetiš sinhronizaciju, ne da te provale.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje ritmove si primetio u komunikaciji ljudi danas? Opiši ih.</li><li>Opiši svoj pokušaj unakrsnog preslikavanja. Kako si se osećao dok si to radio?</li><li>Zašto misliš da je sinhronizacija ritmova toliko moćna i intimna tehnika?</li></ul>`;
-                    break;
-                case 4:
-                    content.uvod = {
-                        naslov: 'Moć Vokalne Sinhronizacije',
-                        tekst: `<p class="kurs-secondary-text">Veza se ne gradi samo telom koje se vidi, već i glasom koji se čuje i dahom koji se oseća. <strong>Usklađivanje glasa</strong> je tehnika prilagođavanja tvog glasa sagovorniku, dok je <strong>usklađivanje disanja</strong> verovatno najdublji i najintimniji nivo povezivanja koji postoji. Kada se vaši glasovi i disanje usklade, vaši nervni sistemi su sinhronizovani, i tada se stvara magija.</p>`,
-                        infographics: [
-                            { icon: 'fa-volume-up', title: 'Brzina & Jačina', text: 'Pričaj sličnim tempom i jačinom kao sagovornik.' },
-                            { icon: 'fa-sliders-h', title: 'Ton & Ritam', text: 'Prilagodi melodiju i ritam svog glasa za potpunu harmoniju.' },
-                            { icon: 'fa-wind', title: 'Ritam Disanja', text: 'Diskretno uskladi svoje disanje sa njihovim za ultimativnu vezu.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Usklađivanje Glasa?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To je svesno prilagođavanje karakteristika tvog glasa (brzina, jačina, ton, ritam) onima koje čuješ kod sagovornika. Ako osoba priča brzo, visoko i energično, a ti sporo, duboko i monotono, stvaraš nesvesni nesklad i deluješ kao da ti je dosadno. Usklađivanjem šalješ moćnu poruku: "Na istoj smo frekvenciji, slušam te i kapiram te."</p>' },
-                        { naslov: 'Nevidljiva Veza: Usklađivanje Disanja', icon: 'fa-link', tekst: '<p class="kurs-secondary-text">Disanje je direktno povezano sa našim emocijama. Kad smo uplašeni dišemo plitko i brzo, kad smo opušteni dišemo duboko i sporo. Kada dvoje ljudi dišu u istom ritmu, njihovi nervni sistemi se bukvalno sinhronizuju. Ovo je najdublji nivo veze. Posmatraj ritam disanja osobe (pomeranje ramena ili grudi) i diskretno počni da dišeš u istom ritmu. Osetićeš duboku promenu u energiji između vas.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Margaret Tačer je pre nego što je postala premijerka imala visok i piskav glas, što su mnogi smatrali znakom slabosti. Unajmila je trenera za glas koji ju je naučio da govori sporije, dublje i sa više autoriteta. Promenom načina na koji njen glas zvuči, promenila je percepciju javnosti o njoj kao lideru. To pokazuje koliko glas, nezavisno od reči, utiče na našu percepciju moći.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas se fokusiramo na zvuk, tišinu i dah.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba usklađivanja glasa - Radio DJ:</strong> U jednom telefonskom razgovoru (gde ne vidiš telo i možeš se potpuno fokusirati na zvuk), tvoj jedini zadatak je da se uskladiš sa brzinom i jačinom glasa sagovornika. Ako on priča brzo, ubrzaj. Ako priča tiho, i ti smanji jačinu. Primetićeš kako razgovor postaje lakši.</li><li><strong>Aktivni Zadatak - Svest o Dahu:</strong> U razgovoru uživo, tvoj zadatak nije da odmah uskladiš disanje, već samo da postaneš svestan ritma disanja sagovornika. Gde vidiš pokret? U ramenima? U grudima? U stomaku? Samo primeti. Svest je prvi korak ka majstorstvu.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Opiši iskustvo usklađivanja glasa. Da li je razgovor tekao glađe?</li><li>Da li ti je bilo lako ili teško da primetiš ritam disanja druge osobe? Opiši šta si video.</li><li>Koliko svest o ovim suptilnim signalima menja tvoju percepciju "normalne" komunikacije?</li></ul>`;
-                    break;
-                case 5:
-                    content.uvod = {
-                        naslov: 'Od Praćenja do Vođenja',
-                        tekst: `<p class="kurs-secondary-text">Do sada smo učili kako da pratimo sagovornika. To je bio ključ za izgradnju mosta poverenja. Sada je vreme da naučimo kako da <strong>vodimo</strong>. Vođenje je prelazak preko tog mosta da bi poveo osobu u smeru u kojem ti želiš – bilo da je to ka opuštenijem stanju, većem entuzijazmu, ili prihvatanju tvoje ideje. Ti postaješ onaj koji vodi ples.</p>`,
-                        infographics: [
-                            { icon: 'fa-chess-knight', title: 'Testiraj', text: 'Napravi mali, suptilan pokret da proveriš da li te sagovornik nesvesno prati.' },
-                            { icon: 'fa-directions', title: 'Vodi', text: 'Ako te prate, možeš suptilno usmeravati energiju i tok razgovora.' },
-                            { icon: 'fa-thermometer-half', title: 'Kontroliši', text: 'Postani termostat koji postavlja temperaturu, a ne termometar koji je samo meri.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta Znači "Voditi"?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">Vođenje je umetnost suptilnog menjanja sopstvenog ponašanja (govora tela, glasa) sa namerom da te sagovornik nesvesno isprati. Ako želiš da smiriš napetu situaciju, ti prvi počni da govoriš sporije i tiše. Ako želiš da podigneš energiju na sastanku, ti prvi postani energičniji. Umesto da reaguješ na atmosferu, ti je svesno stvaraš. Ti si uzrok, a ne posledica.</p>' },
-                        { naslov: 'Kako da Znam da Mogu da Vodim?', icon: 'fa-vial', tekst: '<p class="kurs-secondary-text">Nikada ne pokušavaj da vodiš pre nego što si siguran da imaš duboku vezu. Nakon što si se usklađivao bar nekoliko minuta, vreme je za test. Napravi mali pokret koji nije deo ponašanja druge osobe - na primer, počeši se po bradi ili promeni položaj ruku. Ako osoba u narednih nekoliko sekundi nesvesno napravi sličan pokret (npr. dodirne svoje lice), to je zeleno svetlo. Prati te. Uspešno si prešao sa praćenja na vođenje.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Jedan vrhunski prodavac je imao tehniku sa klijentima koji su bili nervozni i skeptični. Prvo bi se uskladio sa njihovim brzim govorom i tapkanjem prstima. Zatim bi, nakon što oseti da su povezani, polako počeo da usporava svoj govor, da dublje diše i da mirnije drži ruke. U 9 od 10 slučajeva, klijent bi nesvesno usporio svoj govor, prestao da tapka i postao mnogo opušteniji i prijemčiviji za predlog. On nije prodavao proizvod, prodavao je stanje smirenosti.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas preuzimamo kormilo komunikacije.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Mentalna Vežba - Intenzivno Praćenje:</strong> U jednom razgovoru, posveti pune 3 minute isključivo usklađivanju. Uskladite pozu, glas, ritam... Tvoj cilj je da osetiš duboku povezanost pre nego što i pomisliš na vođenje. Oseti kako se gubi granica između vas.</li><li><strong>Aktivni Zadatak - Test i Vođenje:</strong> Nakon perioda intenzivnog usklađivanja, testiraj vezu (npr. promeni položaj sedenja). Ako te isprati, pokušaj da ga vodiš - npr. blago se nagni napred da bi signalizirao poverljivost i vidi da li će i on to uraditi. Zatim se vrati nazad i vidi da li će te i tu ispratiti. Igraj se sa ovim plesom.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Da li si uspeo da te sagovornik isprati? Opiši taj trenutak. Kako si znao da te prati?</li><li>Kako si se osećao u ulozi onoga ko vodi? Da li je bilo prirodno ili čudno?</li><li>Opiši razliku u osećaju moći i odgovornosti između praćenja i vođenja.</li></ul>`;
-                    break;
-                case 6:
-                    content.uvod = {
-                        naslov: 'Čitanje Ljudi Ispod Površine',
-                        tekst: `<p class="kurs-secondary-text"><strong>Kalibracija</strong> je fensi reč za "čitanje ljudi", ali na steroidima. To je tvoje tajno oružje. To je sposobnost da primetiš, u deliću sekunde, sitne, nesvesne promene na drugoj osobi (mikroekspresije, promena boje kože, ritam disanja) i da na osnovu toga znaš kako tvoja poruka stvarno utiče na nju. Ljudi mogu da lažu rečima, ali telo nikada ne laže. Bez kalibracije, ti si slep. Sa kalibracijom, ti vidiš sve i možeš da prilagodiš svoj pristup u letu.</p>`,
-                        infographics: [
-                            { icon: 'fa-eye', title: 'Vizuelno', text: 'Primeti promenu boje kože, veličinu zenica, napetost mišića usana.' },
-                            { icon: 'fa-ear-listen', title: 'Auditivno', text: 'Čuj promenu u tonu, brzini, jačini i ritmu glasa.' },
-                            { icon: 'fa-hand-paper', title: 'Kinestetički', text: 'Oseti promenu u ritmu disanja, napetosti u ramenima, sitnim pokretima.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je "Čitanje Ljudi"?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To nije "čitanje misli". To je čitanje tela i emocija. Ti ne znaš ŠTA osoba misli, ali možeš videti KAKO se njeno unutrašnje stanje menja kao odgovor na tvoje reči. Kalibracija je o primećivanju promena u odnosu na normalno, opušteno stanje osobe. To je razlika između amatera koji recituje tehnike i majstora koji ih prilagođava u realnom vremenu.</p>' },
-                        { naslov: 'Uspostavljanje "Normalnog Stanja"', icon: 'fa-ruler-horizontal', tekst: '<p class="kurs-secondary-text">Ne možeš primetiti promenu ako ne znaš šta je normalno. Pre nego što počneš da "čitaš" nekoga, provedi par minuta u neobaveznom razgovoru o neutralnim temama (vreme, vikend...). Svesno zapamti njegovo "normalno stanje": ton glasa, brzinu treptanja, boju kože, ritam disanja, opuštenost mišića lica. Tek tada možeš primetiti odstupanja kada pređeš na važnije teme.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Profesionalni poker igrači su majstori ovoga. Oni satima posmatraju protivnike, ne da bi videli koje karte imaju, već da bi zapamtili njihovo "normalno stanje" kada imaju slabe karte. Kada igrač dobije jake karte, da li mu se zenice malo rašire? Da li mu glas postane za nijansu viši? To su "znakovi" - odstupanja od normalnog. Oni ne igraju karte, oni igraju ljude.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas oštrimo naša čula do maksimuma.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba "Normalno Stanje":</strong> U razgovoru sa nekim koga dobro poznaješ, tvoj jedini zadatak je da svesno obratiš pažnju na njegovo normalno stanje dok priča o nečemu što voli (hobi, ljubimac). Kako diše, priča i izgleda kada je opušten/a i srećan/a? To je njihovo "pozitivno normalno stanje".</li><li><strong>Aktivni Zadatak "Primeti Promenu":</strong> U drugom razgovoru, postavi neko blago provokativno ili neočekivano pitanje ("Šta misliš o... [kontroverzna tema]?"). Dok odgovara, ne slušaj reči, već traži samo JEDNU promenu u odnosu na normalno stanje. Da li se promenio ton glasa? Da li je disanje postalo pliće? Samo primeti. Ne tumači, samo primeti.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Šta si primetio kao "normalno stanje" kod osobe koju poznaješ? Budi što detaljniji.</li><li>Koju promenu si primetio u drugom razgovoru? Šta misliš da ta promena znači?</li><li>Koliko si do sada bio slep za ove signale? Kako ti ova svest daje ogromnu prednost?</li></ul>`;
-                    break;
-                case 7:
-                    content.uvod = {
-                        naslov: 'Integracija Prve Nedelje',
-                        tekst: `<p class="kurs-secondary-text">Stigli smo do kraja prve, fundamentalne nedelje. Čestitam! Ako si marljivo radio vežbe, postavio si temelje koji te izdvajaju od 99% ljudi koji misle da je komunikacija samo pričanje. Ti sada znaš da je prava komunikacija ples. Više ne komuniciraš samo rečima. Sada govoriš jezikom podsvesti.</p>`,
-                        infographics: [
-                            { icon: 'fa-tools', title: 'Tvoji Alati', text: 'Povezivanje, preslikavanje, vođenje i čitanje ljudi su sada deo tvog alata.' },
-                            { icon: 'fa-lightbulb', title: 'Nova Svest', text: 'Postao si svestan nevidljivog plesa energije i signala u svakoj interakciji.' },
-                            { icon: 'fa-user-ninja', title: 'Nevidljivi Uticaj', text: 'Savladao si temelje nesvesne komunikacije i postavio osnovu za sve što sledi.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Spajanje Delova u Celinu', icon: 'fa-puzzle-piece', tekst: '<p class="kurs-secondary-text">Ove tehnike nisu odvojene. One čine jedan fluidan, neprekidan ples. Ti posmatraš (čitanje ljudi), prilagođavaš se (usklađivanje), testiraš (vođenje) i konstantno proveravaš i ojačavaš vezu. Sve se dešava istovremeno, u realnom vremenu. Tvoj zadatak je da vežbaš dok ovaj ples ne postane prirodan kao disanje, deo tebe.</p>' },
-                        { naslov: 'Od Truda do Navike', icon: 'fa-brain', tekst: '<p class="kurs-secondary-text">Trenutno verovatno moraš aktivno da razmišljaš o ovim tehnikama, što može delovati naporno. To je normalno. To se zove "svesna kompetencija". Kroz konstantnu vežbu i ponavljanje, ove veštine će preći u "nesvesnu kompetenciju", gde ćeš ih raditi automatski, elegantno i savršeno, bez razmišljanja. Kao kad si učio da voziš auto.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Priča se da je jedan zen učitelj, kada su ga pitali kako je postao tako mudar, odgovorio: "Kada sam bio početnik, sekao sam drva i nosio vodu. Sada, kada sam prosvetljen, i dalje sečem drva i nosim vodu." Poenta je da se spolja ništa nije promenilo, ali se unutra promenilo sve. Tako će biti i sa tvojom komunikacijom. Spolja ćeš izgledati isto, ali iznutra ćeš plesati potpuno drugačiji, moćniji ples.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas je dan za duboku refleksiju i planiranje daljeg napretka.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Pregled Dnevnika:</strong> Pročitaj sve svoje unose od Dana 1 do Dana 6. Gde vidiš najveći napredak? U kojoj veštini se osećaš najsigurnije? Gde je najveći otpor ili poteškoća? Budi brutalno iskren prema sebi.</li><li><strong>Samo-ocenjivanje i Plan:</strong> Na skali od 1 do 10, oceni svoju trenutnu veštinu u svakoj od oblasti. Za oblast sa najnižom ocenom, napravi plan kako ćeš je dodatno vežbati u narednoj nedelji, pored novih lekcija.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koji je tvoj najveći "AHA!" trenutak iz prve nedelje, onaj koji ti je promenio pogled na komunikaciju?</li><li>Koju veštinu ćeš nastaviti da svesno vežbaš i kako?</li><li>Kako se tvoja definicija "dobre komunikacije" promenila u poslednjih 7 dana?</li></ul>`;
-                    break;
-                 case 8:
-                    content.uvod = {
-                        naslov: 'Umetnost "Magičnog" Jezika',
-                        tekst: `<p class="kurs-secondary-text">Dobrodošao u drugu nedelju. Sada kada znaš da napraviš most (vezu), učimo kakve poruke da šalješ preko njega. Ulazimo u svet <strong>"Magičnog" Jezika</strong>. Ovo su jezički obrasci koji su "umetnički neodređeni". Oni zaobilaze otpor i govore direktno onom delu uma koji donosi odluke, a to je podsvest.</p>`,
-                        infographics: [
-                            { icon: 'fa-feather-alt', title: 'Nežan Jezik', text: 'Koristi neodređen, sugestivan jezik koji dozvoljava slobodu tumačenja.' },
-                            { icon: 'fa-door-open', title: 'Zaobilaženje Otpora', text: 'Ovaj jezik ne izaziva svesni, kritički um, već ga zaobilazi.' },
-                            { icon: 'fa-brain', title: 'Direktno ka Podsvesti', text: 'Komuniciraj sa delom uma koji upravlja emocijama i odlukama.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Ko je bio Milton Erikson?', icon: 'fa-user-md', tekst: '<p class="kurs-secondary-text">Milton Erikson je bio čuveni psihijatar i hipnoterapeut koji je lečio ljude na neverovatne načine. Pre njega, hipnoza je bila direktna ("Ti ćeš sada zaspati"). Erikson je shvatio da to izaziva otpor. Umesto toga, on je koristio priče, metafore i "pametno neodređen" jezik da bi komunicirao direktno sa podsvesnim umom pacijenta. Ovaj kurs je "preveo" njegov genijalni pristup u praktične alate za svakodnevni život.</p>' },
-                        { naslov: 'Zašto Neodređen Jezik Funkcioniše?', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">Precizan jezik tera ljude da analiziraju, dok neodređen jezik tera ljude da osećaju. Kada kažeš nešto neodređeno, kao "Možeš naučiti mnogo toga danas", slušalac mora da zaviri u sebe i da sam popuni praznine značenjem. Time on postaje saradnik u stvaranju ideje, i zato je ne odbacuje, već je prihvata kao svoju.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Eriksonu je došla žena koja je bila ubeđena da je Isus. Umesto da se raspravlja sa njom (što bi izazvalo otpor), Erikson joj je rekao: "Razumem. Ali, koliko znam, Isus je bio stolar. Tamo ima nešto drva, mislim da treba da napravite policu." Zbunjena, ali nesposobna da logički ospori, počela je da radi. Kroz rad i stvaranje, polako se "vratila u realnost". Nije se borio protiv njenog uverenja, već ga je prihvatio i preusmerio.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas počinjemo da primećujemo i koristimo magiju neodređenosti u jeziku.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba posmatranja - Detektor Neodređenosti:</strong> Slušaj pažljivo političare, marketinške stručnjake ili motivacione govornike. Tvoj zadatak je da identifikuješ tri rečenice koje zvuče dobro, ali su u suštini neodređene i ne govore ništa konkretno (npr. "Moramo raditi za bolju budućnost"). Zapiši ih.</li><li><strong>Aktivni Zadatak - Neodređeni Glagol:</strong> U jednom razgovoru, svesno iskoristi rečenicu sa neodređenim glagolom. Na primer, umesto "Treba da pozovemo Petra", reci "Važno je da se ovo <strong>reši</strong>." (ne kaže se kako). Ili umesto "Moramo da povećamo prodaju za 10%", reci "Moramo da <strong>poboljšamo</strong> situaciju." Obrati pažnju da li neko traži pojašnjenje.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje primere neodređenog jezika si primetio i zapisao?</li><li>Kako je prošao tvoj pokušaj sa neodređenim glagolom? Da li je neko tražio pojašnjenje ili je prihvatio izjavu?</li><li>Zašto misliš da je neodređenost toliko moćna u svakodnevnom uticaju?</li></ul>`;
-                    break;
-                case 9:
-                    content.uvod = {
-                        naslov: 'Izostavljanje i Uopštavanje',
-                        tekst: `<p class="kurs-secondary-text">Danas ulazimo u dva ključna i najčešće korišćena "magična" obrasca: <strong>Izostavljanje i Uopštavanje</strong>. Ovo su jezičke "prečice" koje naš mozak stalno koristi da bi pojednostavio svet. Mi ćemo naučiti da ih svesno primenjujemo kako bismo našu poruku učinili moćnijom i težom za osporavanje.</p>`,
-                        infographics: [
-                            { icon: 'fa-eraser', title: 'Izostavljanje', text: 'Svesno izostavi deo informacije da bi slušalac popunio praznine.' },
-                            { icon: 'fa-globe-americas', title: 'Uopštavanje', text: 'Koristi reči kao "svi", "uvek", "nikad" da stvoriš privid univerzalnog pravila.' },
-                            { icon: 'fa-sitemap', title: 'Struktura Jezika', text: 'Oblikuj percepciju stvarnosti izostavljanjem ili uopštavanjem informacija.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Izostavljanje?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To su rečenice u kojima je deo informacije namerno izostavljen, terajući slušaoca da popuni prazninu iz svog iskustva, čime prihvata tvoju pretpostavku. Postoji više vrsta: <strong>Jednostavno izostavljanje:</strong> "Znam da si zbunjen." (o čemu?). <strong>Uporedno izostavljanje:</strong> "Ovo je bolja opcija." (bolja od čega?). Korišćenjem ovoga, ti impliciraš stvari bez da ih direktno kažeš.</p>' },
-                        { naslov: 'Šta je Uopštavanje?', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">To su obrasci koji uzimaju jedan primer i pretvaraju ga u univerzalno pravilo. Najčešće se koriste reči kao "svi", "uvek", "nikad", "svaki", "svako". Kada kažeš "Svi znaju da je ovo istina", stvaraš socijalni pritisak. Ko želi da prizna da nije deo "svih"? Ove reči stvaraju privid neoborivog pravila i autoriteta.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Marketinški slogani su puni ovih obrazaca. L\'Orealov slogan "Jer vi to zaslužujete" je majstorsko izostavljanje. Ne kaže se šta tačno zaslužujete, već se dozvoljava da sami popunite prazninu najlepšim osećajem, povezujući ga sa proizvodom. Slogan "Verovatno najbolje pivo na svetu" koristi uporedno izostavljanje ("verovatno") da zvuči skromno, ali i dalje moćno, jer ne kažu u odnosu na šta je najbolje.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas vežbamo da primećujemo i koristimo jezičke prečice.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba slušanja - Lov na Obrasce:</strong> Tokom dana, tvoj zadatak je da "uhvatiš" i zapišeš bar jedan primer izostavljanja i jedan primer uopštavanja koji čuješ u razgovorima, na TV-u ili u reklamama. Postani svestan koliko su ovi obrasci svuda oko nas.</li><li><strong>Aktivni Zadatak - Moćno Uopštavanje:</strong> U jednoj rečenici danas, svesno iskoristi reč "svi" ili "uvek" da pojačaš svoju poentu. Na primer, umesto "Mislim da je važno biti efikasan", reci "Svi se slažu da je važno biti efikasan." Obrati pažnju na reakciju, da li neko osporava "sve".</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje primere izostavljanja i uopštavanja si "uhvatio" danas?</li><li>Kako je upotreba uopštavanja uticala na snagu tvoje izjave?</li><li>Kako se sada, kada ih prepoznaješ, možeš odbraniti od manipulacije? (Hint: postavljanjem preciznih pitanja: "Svi? Baš svako? Bolje od čega tačno?")</li></ul>`;
-                    break;
-                case 10:
-                    content.uvod = {
-                        naslov: 'Čitanje Ljudi (Napredni Nivo)',
-                        tekst: `<p class="kurs-secondary-text"><strong>"Čitanje Uma"</strong> zvuči kao magija, ali to je jezički obrazac gde se ponašaš kao da znaš kako se neko oseća ili šta misli, bez da ti je to direktno rečeno. Ovo je izuzetno moćno za stvaranje duboke veze, jer ako pogodiš, pokazuješ neverovatan nivo razumevanja. Ako promašiš, a uradiš to elegantno, i dalje pokazuješ da se trudiš da razumeš.</p>`,
-                        infographics: [
-                            { icon: 'fa-hat-wizard', title: '"Znam da se pitaš..."', text: 'Pretpostavi unutrašnje stanje, misli ili pitanja osobe.' },
-                            { icon: 'fa-user-secret', title: '"Deluje mi kao da..."', text: 'Koristi blaže forme da smanjiš rizik od greške i ne deluješ arogantno.' },
-                            { icon: 'fa-sync', title: 'Zasnovano na Čitanju Tela', text: 'Najbolje "čitanje uma" je zapravo pretvaranje govora tela u reči.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Kako "Čitati Um"?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To je pretvaranje nečijeg unutrašnjeg stanja u reči. Primeri: "Znam da se pitaš kako je ovo moguće.", "Vidim da si skeptičan po ovom pitanju.", "Osećam da si spreman za sledeći korak." Ključ je da se ove izjave daju samouvereno, ali i da se pažljivo gleda reakcija. Ako vidiš pozitivan znak (klimanje glavom, opuštanje), pogodio si. Ako vidiš negativan, možeš se lako povući: "Mada, možda i grešim."</p>' },
-                        { naslov: 'Veza sa Čitanjem Tela', icon: 'fa-link', tekst: '<p class="kurs-secondary-text">"Čitanje uma" nije magija. Ono funkcioniše najbolje kada je zasnovano na dobrom čitanju govora tela (Lekcija 6). Ti primećuješ neverbalne signale (npr. skrštene ruke, stisnute usne) i onda ih "prevodiš" u reči ("Deluješ pomalo rezervisano po ovom pitanju."). To pokazuje visok nivo socijalne inteligencije i empatije, jer pokazuješ da obraćaš pažnju ne samo na reči, već na celu osobu.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Veliki iluzionisti, kao što je Derren Brown, ne čitaju misli. Oni čitaju ljude. Kada publici kaže "Znam da neko u ovom redu razmišlja o plavom slonu", on to ne zna magično. On je prethodno postavio sugestiju ("Nemojte misliti na plave slonove") ili je primetio nekoga ko je reagovao na pomen plave boje. Zatim samouvereno iznosi "pročitanu misao", što stvara iluziju magije, a zapravo je samo vrhunska primena čitanja tela i jezičkih obrazaca.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas postajemo detektivi unutrašnjih stanja.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba "Pogodi Emociju":</strong> Gledaj neku dramsku seriju ili film bez tona. Tvoj zadatak je da za svakog lika u sceni napišeš koju emociju misliš da oseća, samo na osnovu govora tela i izraza lica. Zatim pusti ton da proveriš koliko si bio u pravu.</li><li><strong>Aktivni Zadatak - Nežno Čitanje Uma:</strong> U razgovoru, iskoristi blagu, neobavezujuću formu. Umesto "Znam da misliš...", reci "Deluje mi kao da si se baš zamislio oko toga." ili "Pretpostavljam da ti je drago što se to tako završilo." Ovo je siguran način da vežbaš, jer daješ osobi prostor da te ispravi bez svađe.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koliko si bio uspešan u pogađanju emocija u filmu? Koje signale si koristio?</li><li>Kako je osoba reagovala na tvoje "nežno čitanje uma"? Da li je potvrdila ili negirala tvoju pretpostavku?</li><li>Koja je razlika između empatije ("Osećam sa tobom") i "čitanja uma" ("Znam kako se osećaš")?</li></ul>`;
-                    break;
-                case 11:
-                    content.uvod = {
-                        naslov: 'Skrivene Poruke',
-                        tekst: `<p class="kurs-secondary-text"><strong>Skrivene Komande</strong> su direktne poruke sakrivene unutar duže, naizgled neobavezne rečenice. Podsvest, koja je veoma bukvalna, čuje i obrađuje komandu, dok je svesni um zaokupljen analizom logike cele rečenice. Ovo je jedna od najpoznatijih i najmoćnijih tehnika za direktan uticaj, kao da šalješ poruku ispod radara.</p>`,
-                        infographics: [
-                            { icon: 'fa-code-branch', title: 'Skrivene Komande', text: 'Naglašavaj akcione reči u rečenici. "...možeš <b>opustiti se sada</b>."' },
-                            { icon: 'fa-tag', title: 'Skrivena Pitanja', text: 'Postavi pitanje unutar izjave. "Pitam se da li si spreman za promenu?"' },
-                            { icon: 'fa-microphone-alt', title: 'Naglašavanje Glasom', text: 'Tvoj glas je marker koji podsvesti govori šta je važno i šta treba da zapamti.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta su Skrivene Komande?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To su kratke, akcione fraze (obično 2-4 reči) koje su "sakrivene" unutar duže, gramatički ispravne rečenice. Svesni um prati logiku cele rečenice ("Pričam o tome kako ljudi mogu da se opuste"), dok podsvest, koja je bukvalna kao malo dete, čuje i reaguje na izolovanu komandu ("opusti se").</p>' },
-                        { naslov: 'Kako ih Pravilno Isporučiti?', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">Ispravna isporuka je ključna. Komanda se obično obeleži suptilnom promenom u tonu glasa (blago spuštanje tona ili promenu ritma), malom pauzom pre i posle komande, ili diskretnim gestom ruke. Primer: "Ne znam kada ćeš početi da se... (pauza) <strong>osećaš potpuno opušteno</strong>... (pauza) u vezi ovoga." Naglašavanje glasom je ono što podsvesti signalizira "Ovo je za tebe".</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Stiv Džobs je bio majstor ovoga. U svojim čuvenim prezentacijama, često bi koristio fraze poput: "I mi mislimo da ćete... <strong>voleti ovo</strong>." Ili "Sada možete... <strong>držati internet u svojim rukama</strong>." Dok je publika svesno slušala o karakteristikama proizvoda, njihova podsvest je primala direktne, neodoljive komande koje su stvarale želju.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas vežbamo da budemo jezički nindže, ubacujući poruke ispod radara.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba pisanja - Kreiranje Komandi:</strong> Napiši pet različitih rečenica koje sadrže skrivene komande. Podvuci komandu. Primer: "Ne moraš da <strong>doneseš odluku odmah</strong>, ali razmisli o mogućnostima." Cilj je da rečenica zvuči potpuno prirodno.</li><li><strong>Aktivni Zadatak - Naglašavanje Glasom:</strong> U razgovoru, izaberi jednu ključnu, pozitivnu reč koju želiš da naglasiš (npr. "uspeh", "lako", "sigurno"). Tvoj zadatak je da samo tu reč izgovoriš sa blago drugačijim, nižim i sporijim tonom. Samo jedna reč. Vežbaj kontrolu nad svojim glasom kao instrumentom.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje si rečenice sa skrivenim komandama napisao? Da li zvuče prirodno?</li><li>Da li si uspeo da naglasiš reč tonom? Da li si primetio ikakvu promenu u pažnji sagovornika u tom trenutku?</li><li>Koliko svesno koristiš svoj glas kao alat za naglašavanje, a ne samo kao prenosnik reči?</li></ul>`;
-                    break;
-                case 12:
-                    content.uvod = {
-                        naslov: 'Moć Metafore i Priče',
-                        tekst: `<p class="kurs-secondary-text">Metafore i priče su kraljice uticaja. One su jezik podsvesti. Dok svesni um može da se raspravlja sa činjenicama, on se ne može raspravljati sa pričom. Priče zaobilaze logiku i govore direktno srcu i emocijama, stvarajući duboko i trajno razumevanje. One su savršeno vozilo za prenošenje kompleksnih sugestija na potpuno neprimetan i elegantan način.</p>`,
-                        infographics: [
-                            { icon: 'fa-film', title: 'Transport', text: 'Dobra priča prenosi slušaoca u drugi svet, isključujući kritički filter.' },
-                            { icon: 'fa-lightbulb', title: 'Indirektna Poruka', text: 'Ispričaj priču o "nekom drugom" da bi preneo osetljivu poruku.' },
-                            { icon: 'fa-puzzle-piece', title: 'Metafora je Ključ', text: 'Objasni apstraktne i kompleksne ideje kroz jednostavne, poznate slike.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Zašto Mozak Voli Priče?', icon: 'fa-brain', tekst: '<p class="kurs-secondary-text">Naš mozak je evolutivno programiran za priče. Hiljadama godina, znanje se prenosilo kroz priče oko vatre. Priče aktiviraju više delova mozga istovremeno (vizuelni, auditivni, emocionalni centri), stvarajući mnogo jaču i dugotrajniju memorijsku vezu nego suve činjenice. Kada slušamo priču, naš kritički filter se "isključuje" i mi se prepuštamo iskustvu, postajući otvoreniji za poruke unutar priče.</p>' },
-                        { naslov: 'Priča Koja Leči', icon: 'fa-equals', tekst: '<p class="kurs-secondary-text">Milton Erikson je koristio priče koje su imale istu strukturu kao i problem slušaoca, ali sa drugačijim likovima. Podsvest prepoznaje obrazac i primenjuje rešenje iz priče na stvarni problem. Na primer, pričate o hrabrom semenu koje raste u mraku i probija se ka svetlosti da biste nekome dali snagu da prođe kroz težak period, bez da mu direktno kažete "Budi jak".</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Isus nije držao predavanja o moralu; pričao je parabole. O dobrom Samarićaninu, o izgubljenom sinu... Pričao je jednostavne priče sa likovima sa kojima su ljudi mogli da se poistovete. Te priče i njihove poruke su odjekivale vekovima, mnogo jače nego da je samo rekao "Budite dobri jedni prema drugima." On je znao da priča menja ljude, a ne naredba.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas razmišljamo u slikama i pričama.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba "Banka Metafora":</strong> Za tri apstraktna pojma (npr. promena, upornost, timski rad), smisli po jednu jednostavnu metaforu koja ih opisuje. Primer za promenu: "Promena je kao gusenica koja postaje leptir. Možda je proces čudan, ali je transformacija prelepa."</li><li><strong>Aktivni Zadatak - Ispričaj Metaforu:</strong> U razgovoru danas, kada se ukaže prilika, umesto da date direktan savet ili izjavu, upotrebite jednu od svojih metafora (ili neku drugu poznatu) da objasnite svoju poentu. Na primer, umesto "Moramo da radimo zajedno", recite "Znate, jedan prut se lako slomi, ali snop prutova je nesalomiv."</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje metafore si smislio? Da li su jednostavne i jasne?</li><li>Da li si uspeo da iskoristiš metaforu? Kako je osoba reagovala? Da li je poruka imala jači efekat?</li><li>Zašto misliš da su priče i metafore moćnije od direktnih izjava i činjenica?</li></ul>`;
-                    break;
-                case 13:
-                    content.uvod = {
-                        naslov: 'Umetnost Nejasnih Poruka',
-                        tekst: `<p class="kurs-secondary-text"><strong>Nejasne poruke</strong> su namerno korišćenje reči ili rečenica koje mogu imati više značenja. Ovo je napredna tehnika koja okupira svesni, analitički um dok podsvest bira značenje koje joj najviše odgovara. To je kao da bacite nekoliko loptica, a podsvest uhvati onu koja joj se najviše sviđa, misleći da je sama izabrala.</p>`,
-                        infographics: [
-                            { icon: 'fa-comments', title: 'Iste Reči, Drugo Značenje', text: 'Reči koje zvuče slično ali imaju različito značenje (npr. "put" i "put").' },
-                            { icon: 'fa-stream', title: 'Zapetljana Rečenica', text: 'Struktura rečenice koja se može tumačiti na više načina.' },
-                            { icon: 'fa-low-vision', title: 'Nejasnoća', text: 'Nejasno je na koji deo rečenice se odnosi pridev ili prilog.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Nejasna Poruka?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To je jezički alat koji svesnom umu daje zagonetku da rešava ("Šta je pisac hteo da kaže?"), čime se zaobilazi njegov otpor i otvara direktan put do podsvesti. Podsvest će automatski izabrati značenje koje je najkorisnije ili najrelevantnije za nju u tom trenutku, prihvatajući sugestiju kao sopstvenu misao.</p>' },
-                        { naslov: 'Vrste Nejasnoća', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">Postoji nekoliko vrsta koje možete koristiti: <strong>1. Iste reči, drugo značenje:</strong> Reči koje zvuče isto, a imaju različito značenje (npr. "put" i "put"). <strong>2. Zapetljana rečenica:</strong> Struktura rečenice je nejasna. "Razgovarati sa tobom kao inteligentnom osobom je zadovoljstvo." (Ko je inteligentan? Ja, ti, ili oboje?). <strong>3. Nejasnoća opsega:</strong> Nejasno je na šta se odnosi deo rečenice. "Stare muškarce i žene treba zbrinuti." (Da li su samo muškarci stari, ili i žene?).</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Proročanstvo u Delfima je bilo poznato po majstorskoj upotrebi nejasnih poruka. Kada je kralj Lidije pitao da li da napadne Persiju, proročanstvo je reklo: "Ako pređeš reku, uništićeš veliko carstvo." On je prešao, napao i bio poražen. Uništio je veliko carstvo – svoje. Proročanstvo je bilo tehnički tačno u oba slučaja, prebacujući odgovornost za tumačenje na kralja.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas vežbamo da budemo "umetnički nejasni" sa ciljem.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba posmatranja - Lov na Nejasnoću:</strong> Obrati pažnju na naslove u novinama, reklamne slogane ili horoskope. Oni često koriste nejasne poruke da bi bili intrigantniji i primenjivi na što više ljudi. Pronađi i zapiši dva primera.</li><li><strong>Aktivni Zadatak - Kreiranje Nejasnoće:</strong> Pokušaj da konstruišeš jednu rečenicu koja je nejasna, po ugledu na primer iz teorije ("Razgovarati sa X kao Y..."). Ne moraš je čak ni upotrebiti, samo vežbaj da je stvoriš i da prepoznaš njena moguća značenja.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje primere nejasnih poruka si primetio?</li><li>Koju si rečenicu konstruisao? Koja su njena moguća tumačenja?</li><li>Kako nejasnoća može biti korisna za otvaranje novih mogućnosti, a kako štetna ako se koristi za obmanu?</li></ul>`;
-                    break;
-                case 14:
-                    content.uvod = {
-                        naslov: 'Jezička Magija: Refleksija',
-                        tekst: `<p class="kurs-secondary-text">Završili smo drugu nedelju i zaronili duboko u strukturu jezika. Otkrili smo kako reči, kada se koriste sa namerom i preciznošću, mogu da oblikuju percepciju, zaobiđu otpor i inspirišu promenu. Savladao si osnove <strong>"Magičnog" Jezika</strong> i sada poseduješ moćan alat. Ti više nisi samo pasivni korisnik jezika; ti si njegov svesni arhitekta.</p>`,
-                        infographics: [
-                            { icon: 'fa-language', title: 'Novi Jezik', text: 'Sada razumeš da jezik ne opisuje samo stvarnost, već je i aktivno stvara.' },
-                            { icon: 'fa-pen-nib', title: 'Ti si Arhitekta', text: 'Svesno biraš reči i jezičke strukture da bi stvorio željeni efekat.' },
-                            { icon: 'fa-magic', title: 'Moć je u Tebi', text: 'Savladavanjem jezika, savladavaš umetnost uticaja na najdubljem nivou.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Arhitektura Jezika', icon: 'fa-sitemap', tekst: '<p class="kurs-secondary-text">Sada razumeš kako da koristiš neodređenost da stvoriš pristanak, kako da ubaciš skrivene komande, i kako da pričaš priče koje govore direktno podsvesti. Ti više nisi samo korisnik jezika; ti si njegov arhitekta. Svesno biraš reči i strukture da bi postigao željeni efekat, baš kao što arhitekta bira materijale da bi izgradio zgradu.</p>' },
-                        { naslov: 'Odbrana od Manipulacije', icon: 'fa-shield-alt', tekst: '<p class="kurs-secondary-text">Jednako važno, sada kada poznaješ ove obrasce, postao si imun na njihovu manipulativnu upotrebu. Kada čuješ uopštavanje ("Svi to rade"), tvoj um automatski postavlja pitanje: "Svi? Baš svako?". Kada čuješ izostavljanje ("Ovo je bolje"), pitaš: "Bolje od čega tačno?". Prepoznaješ tehniku i ona gubi moć nad tobom. Znanje je tvoj štit.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Džordž Orvel je u svom romanu "1984" predstavio koncept "Novogovora", jezika koji je totalitarni režim namerno osiromašio da bi suzio opseg misli. Ukidanjem reči kao što su "sloboda", režim je planirao da onemogući i samu pomisao na slobodu. To je ekstremni primer kako jezik ne opisuje samo stvarnost, već je i stvara ili uništava.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas je vreme za refleksiju o tvojoj novoj jezičkoj moći i odgovornosti.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Pregled Dnevnika:</strong> Pročitaj svoje unose od Dana 8 do Dana 13. Koji jezički obrazac ti se čini najmoćnijim? Koji ti je najteži za primenu i zahteva još vežbe? Budi iskren.</li><li><strong>Test Razumevanja - Objasni Detetu:</strong> Zamisli da treba da objasniš desetogodišnjaku šta je suština "magičnog" jezika. Kako bi to uradio u dve-tri jednostavne rečenice? Sposobnost da se kompleksna ideja pojednostavi je znak pravog razumevanja.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koji je tvoj najveći uvid iz ove nedelje učenja o jeziku?</li><li>Navedi jednu konkretnu situaciju u narednoj nedelji gde ćeš svesno primeniti jedan od ovih jezičkih obrazaca.</li><li>Da li se osećaš moćnije sada kada razumeš kako jezik funkcioniše na dubljem nivou? Kako ćeš tu moć koristiti?</li></ul>`;
-                    break;
-                case 15:
-                    content.uvod = {
-                        naslov: 'Stvaranje Emocionalnih Okidača',
-                        tekst: `<p class="kurs-secondary-text">Dobrodošao u treću, naprednu nedelju. Počinjemo sa <strong>Stvaranjem Okidača</strong>. To je proces stvaranja veze u mozgu između specifičnog, jedinstvenog okidača (stimulusa) i snažnog osećanja. Jednom kada je okidač postavljen, svaki put kada ga aktiviraš, osoba će nesvesno i trenutno osetiti to osećanje. Učimo kako da svesno stvaramo prečice do emocija.</p>`,
-                        infographics: [
-                            { icon: 'fa-anchor', title: 'Stimulus-Odgovor', text: 'Poveži specifičan okidač (jedinstven dodir, reč, gest) sa vrhuncem emocionalnog stanja.' },
-                            { icon: 'fa-bell', title: 'Pavlovljev Pas', text: 'Jednom postavljeno, okidač automatski i nesvesno izaziva programiranu reakciju.' },
-                            { icon: 'fa-fingerprint', title: 'Jedinstvenost je Ključ', text: 'Okidač mora biti jedinstven i lak za ponavljanje da ne bi dolazilo do grešaka.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Stvaranje Okidača?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To je klasično uslovljavanje, kao kod Pavlovljevog psa. Zvono (okidač) je povezano sa hranom, i pas počinje da slini (stanje) samo na zvuk zvona. Mi konstantno postavljamo i aktiviramo okidače nesvesno. Pesma koja nas podseti na leto, miris koji nas vrati u detinjstvo... Danas učimo kako da postanemo svesni kreatori ovih moćnih veza, kako za sebe, tako i za druge.</p>' },
-                        { naslov: '4 Koraka za Stvaranje Okidača', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text">Proces mora biti precizan: <strong>1. Uvedi osobu u jako, čisto osećanje:</strong> Pitaj je da se seti trenutka kada se osećala potpuno samouvereno. <strong>2. Primeti vrhunac:</strong> Gledaj i slušaj. Kada je osećanje najjače (promena u disanju, boji lica, tonu glasa)? <strong>3. Postavi okidač:</strong> Tačno u trenutku vrhunca, primeni jedinstven okidač (npr. specifičan dodir na rame, ili izgovaranje reči "Sada!" posebnim tonom). <strong>4. Prekini stanje i testiraj:</strong> Promeni temu, a zatim nakon minut-dva, aktiviraj okidač (dodirni isto mesto istim pritiskom). Posmatraj da li se osećanje vraća.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Toni Robins je poznat po korišćenju masovnog stvaranja okidača na svojim seminarima. Kada publiku dovede do vrhunca euforije kroz muziku i govor, on često uradi specifičan pokret ili uzvikne određenu reč. Time stvara okidač. Kasnije, kada energija u sali padne, on samo ponovi taj pokret i publika se momentalno, nesvesno vraća u stanje euforije. On ne motiviše ljude iznova, on samo "pritiska dugme" koje je prethodno instalirao.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas vežbamo da budemo "lovci na osećanja" i da ih "usidrimo".</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba "Lični Okidači":</strong> Identifikuj tri pozitivna okidača koja već postoje u tvom životu. Koja pesma te čini nepobedivim? Koji miris te opušta? Koje mesto te čini mirnim? Postani svestan svojih postojećih okidača.</li><li><strong>Aktivni Zadatak "Postavi Okidač na Sebe":</strong> Seti se trenutka kada si se osećao izuzetno moćno, samouvereno i nezaustavljivo. Proživi taj osećaj u potpunosti, vidi šta si video, čuj šta si čuo, oseti šta si osetio. Kada je osećaj na svom apsolutnom vrhuncu, snažno stisni palac i kažiprst desne ruke na 3-4 sekunde. Zatim otvori, razmrdaj prste. Ponovi ovo 5-6 puta. Sada imaš "okidač samopouzdanja" koji možeš koristiti pre važnih događaja.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koji su tvoji lični okidači koje si identifikovao?</li><li>Opiši proces postavljanja okidača na sebe. Da li osećaš promenu kada ga aktiviraš? Koliko je jaka?</li><li>Kako možeš etički koristiti okidače da pomogneš prijatelju da se oseća bolje ili samopouzdanije?</li></ul>`;
-                    break;
-                case 16:
-                    content.uvod = {
-                        naslov: 'Resetovanje Sagovornika',
-                        tekst: `<p class="kurs-secondary-text"><strong>Prekidanje Obrasca</strong> je moćna tehnika kojom namerno prekidaš očekivani tok događaja, razgovora ili čak misli da bi stvorio trenutak konfuzije. U tom kratkom trenutku, svesni, analitički um je "resetovan" i podsvest je izuzetno otvorena za nove sugestije, jer traži rešenje za nastalu pometnju.</p>`,
-                        infographics: [
-                            { icon: 'fa-unlink', title: 'Prekini Očekivano', text: 'Uradi nešto potpuno neočekivano da zbuniš svesni um i prekineš automatizam.' },
-                            { icon: 'fa-handshake-slash', title: 'Primer', text: 'Promeni normalan tok rukovanja da stvoriš trenutak konfuzije i otvoriš um.' },
-                            { icon: 'fa-sign-in-alt', title: 'Vrata ka Podsvesti', text: 'U trenutku konfuzije, podsvest je širom otvorena za nove sugestije i komande.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Prekid Obrasca?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">Naši mozgovi vole obrasce i navike da bi štedeli energiju. Rukovanje, odgovaranje na "Kako si?", vožnja automobila - sve su to automatski programi. Kada neočekivano prekinete taj program (npr. umesto da pružite ruku, vi je povučete), mozak na trenutak ne zna šta da radi. To je vaša prilika da ubacite novu ideju, sugestiju ili preusmerite pažnju.</p>' },
-                        { naslov: 'Zašto je Zbunjenost Korisna?', icon: 'fa-brain', tekst: '<p class="kurs-secondary-text">Zbunjenost je stanje u kojem svesni, kritički um privremeno odustaje od traženja smisla, jer je preopterećen. U tom mentalnom "vakuumu", on postaje veoma otvoren za bilo kakvu novu informaciju koja će mu vratiti osećaj sigurnosti i smisla. Ta nova informacija je vaša sugestija. To je kao restartovanje kompjutera da bi se instalirao novi program.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Milton Erikson je imao pacijentkinju koja se stalno i opsesivno žalila na iste stvari. Jednog dana, usred njene tirade, umesto da je sluša, on je ustao, otišao do saksije sa cvećem, uzeo je i pružio joj je. Zapanjena, prekinula je svoje žaljenje i pitala: "Šta da radim sa ovim?". Erikson je odgovorio: "Odnesite je u moju kancelariju i zalijte je." Potpuno je prekinuo njen negativni obrazac i dao joj novu, konstruktivnu komandu.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas smo agenti konstruktivnog haosa.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba posmatranja - Lov na Navike:</strong> Tvoj zadatak je da identifikuješ tri socijalna obrasca koja ljudi oko tebe rade potpuno automatski (npr. pozdravljanje u liftu, način na koji naručuju kafu, fraze koje stalno ponavljaju). Samo posmatraj i postani svestan tih "programa".</li><li><strong>Aktivni Zadatak - Blagi Prekid:</strong> Izvrši jedan blag, pozitivan i bezazlen prekid obrasca. Kada ti kasirka kaže automatsko "Prijatno", umesto automatskog "Hvala, takođe", zastani na sekund, pogledaj je u oči, nasmej se i reci nešto neočekivano i toplo, kao "I vama želim prijatan i miran ostatak dana." Promeni skriptu i posmatraj kako si je "probudio" iz automatizma.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koje socijalne obrasce i navike si primetio?</li><li>Opiši detaljno kako je osoba reagovala na tvoj blagi prekid obrasca.</li><li>Kako možeš koristiti prekidanje sopstvenih negativnih navika (npr. odlaganje, negativan samogovor) da poboljšaš svoj život?</li></ul>`;
-                    break;
-                case 17:
-                    content.uvod = {
-                        naslov: 'Umetnost Menjanja Okvira',
-                        tekst: `<p class="kurs-secondary-text"><strong>Menjanje Okvira</strong> je jedna od najmoćnijih veština za promenu perspektive, kako sopstvene, tako i tuđe. To je umetnost menjanja značenja nekog događaja ili izjave, čime se automatski menja i osećanje u vezi njega. Zapamti: ništa nema značenje samo po sebi; mi mu dajemo značenje. Menjanje okvira je svesno biranje korisnijeg i moćnijeg značenja.</p>`,
-                        infographics: [
-                            { icon: 'fa-window-frame', title: 'Promena Konteksta', text: 'Pronađi kontekst u kojem je "problematično" ponašanje zapravo korisno.' },
-                            { icon: 'fa-glasses', title: 'Promena Sadržaja', text: 'Fokusiraj se na drugi, pozitivniji deo iskustva da bi promenio njegovo značenje.' },
-                            { icon: 'fa-recycle', title: 'Problem u Priliku', text: 'Najmoćniji potez je pretvaranje problema, prigovora ili slabosti u prednost.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Menjanje Okvira?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To je komunikacijska alhemija. To je sposobnost da uzmete "problem" i stavite ga u drugačiji mentalni "okvir", tako da izgleda kao prilika, lekcija ili prednost. Kada vam neko iznese prigovor ("Ovo je preskupo"), majstor uticaja ne raspravlja, on menja okvir ("Hajde da ne gledamo na ovo kao na trošak, već kao na investiciju u miran san.").</p>' },
-                        { naslov: 'Menjanje Konteksta vs. Sadržaja', icon: 'fa-cogs', tekst: '<p class="kurs-secondary-text"><strong>Menjanje Konteksta:</strong> Ponašanje koje je problem u jednom kontekstu je korisno u drugom. "Previše si tvrdoglav." -> "To znači da ćeš biti neverovatno uporan u ostvarivanju svojih ciljeva kada je to važno." <strong>Menjanje Sadržaja:</strong> Menjanje direktnog značenja negativne izjave. "Pao sam na ispitu." -> "Odlično, ovo nije pad, ovo je detaljna povratna informacija o tome šta tačno treba da naučim da bih bio savršen sledeći put."</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Kada su Tomasa Edisona novinari pitali kako se oseća nakon hiljadu neuspelih pokušaja da napravi sijalicu, on je odgovorio: "Nisam pao hiljadu puta. Sijalica je izum sa hiljadu koraka." On je "neuspeh" preoblikovao u "korak u procesu". Ta jednostavna promena okvira mu je dala psihološku snagu da nastavi i na kraju uspe.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas postajemo alhemičari značenja, pretvarajući olovo u zlato.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba "Lično Menjanje Okvira":</strong> Uzmi jedan svoj lični problem ili "manu" koja te muči. Napiši je. Zatim, smisli i zapiši bar tri načina da je preoblikuješ u nešto pozitivno ili korisno. (Npr. "Previše brinem" -> "Imam sposobnost da predvidim potencijalne probleme pre drugih.")</li><li><strong>Aktivni Zadatak "Uhvati i Promeni Okvir":</strong> U razgovoru danas, pažljivo slušaj. Kada čuješ nekoga da iznosi negativno uverenje ili problem ("Ovo je preteško"), tvoj zadatak je da ga nežno preoblikuješ. "Čujem da kažeš da je to teško, a šta ako je to samo znak da je nagrada na kraju vredna truda?"</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Kako si promenio okvir svom ličnom problemu? Da li se osećaš imalo drugačije u vezi njega sada?</li><li>Kako je osoba reagovala na tvoj pokušaj menjanja okvira? Da li je prihvatila novi "okvir"?</li><li>Koliko naš život i osećanja zavise od "okvira" kroz koje posmatramo svet, a ne od samih događaja?</li></ul>`;
-                    break;
-                case 18:
-                    content.uvod = {
-                        naslov: 'Pravljenje Plana za Uspeh',
-                        tekst: `<p class="kurs-secondary-text">Do sada smo naučili pojedinačne note i instrumente. Danas učimo kako da ih spojimo u moćnu simfoniju. <strong>Strategije</strong> su svesno i namerno nizanje tehnika koje smo naučili kako bi se postigao određeni cilj. Ovo je prelaz sa reaktivne na proaktivnu komunikaciju. To je kao partija šaha gde razmišljaš nekoliko poteza unapred.</p>`,
-                        infographics: [
-                            { icon: 'fa-layer-group', title: 'Slaganje Tehnika', text: 'Poveži povezivanje, menjanje okvira, okidače i jezičke obrasce u jednu tečnu celinu.' },
-                            { icon: 'fa-route', title: 'Vodi ih Putem', text: 'Svesno vodi sagovornika kroz željena osećanja i misli.' },
-                            { icon: 'fa-chess', title: 'Razmišljaj Unapred', text: 'Planiraj ključne tačke svoje komunikacije kao što velemajstor planira partiju šaha.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Strategija?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">To je svestan plan komunikacije dizajniran da postigne specifičan ishod. Umesto da reaguješ impulsivno na ono što se dešava, ti unapred dizajniraš redosled koraka (tehnika) koje će sagovornika najverovatnije dovesti do željenog zaključka ili stanja. Više ne reaguješ na tok razgovora, ti ga svesno stvaraš.</p>' },
-                        { naslov: 'Primer Strategije za Prezentaciju Ideje', icon: 'fa-sitemap', tekst: '<p class="kurs-secondary-text"><strong>1. Povezivanje:</strong> Na početku, uskladi se sa energijom i jezikom publike. <strong>2. Prekid Obrasca:</strong> Započni sa nečim neočekivanim (pitanje, statistika) da im privučeš punu pažnju. <strong>3. Menjanje Okvira Problema:</strong> Predstavi trenutni problem na nov, urgentniji način. <strong>4. Metafora:</strong> Objasni svoju kompleksnu ideju kroz jednostavnu i moćnu metaforu. <strong>5. Stvaranje Okidača:</strong> Poveži pozitivno osećanje (npr. uspeh, sigurnost) sa ključnom reči ili slikom tvoje ideje. <strong>6. "Magični" Jezik:</strong> Koristi neodređen jezik da im omogućiš da sami zamisle benefite. <strong>7. Poziv na akciju:</strong> Završi sa jasnom, skrivenom komandom.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Veliki vojskovođa Sun Tzu je u "Umeću ratovanja" napisao: "Svaka bitka je dobijena pre nego što je i počela." On nije mislio na samu borbu, već na superiornu strategiju, pripremu i poznavanje terena. Pobednik je onaj ko ima bolji plan. Isto važi i za komunikaciju. Najuticajniji ljudi ne improvizuju u ključnim momentima; oni imaju jasnu strategiju.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas smo stratezi i arhitekte komunikacije.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Dizajniraj Strategiju:</strong> Izaberi jedan realan, konkretan cilj uticaja koji imaš u narednom periodu (npr. ubediti šefa u povišicu, predstaviti ideju timu). Na papiru, detaljno dizajniraj strategiju od bar 4 koraka, koristeći specifične tehnike koje smo naučili za svaki korak.</li><li><strong>Mentalna Proba:</strong> Zatvori oči i prođi kroz svoju strategiju u glavi kao da gledaš film. Vizualizuj svaki korak. Kako ćeš izvesti svaku tehniku? Kakvu reakciju očekuješ? Kako ćeš se prilagoditi ako reakcija bude drugačija? Ponavljaj dok se ne osetiš potpuno samouvereno.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Opiši svoju strategiju. Koji koraci ti se čine najvažnijim i zašto?</li><li>Kako se menja tvoj osećaj samopouzdanja i kontrole kada imaš jasan plan umesto da improvizuješ?</li><li>Koja je, po tvom mišljenju, ključna razlika između etičke strategije (uticaja) i neetičke strategije (manipulacije)?</li></ul>`;
-                    break;
-                case 19:
-                    content.uvod = {
-                        naslov: 'Uticaj na Grupu',
-                        tekst: `<p class="kurs-secondary-text">Sve što smo do sada učili mora se prilagoditi kada se primenjuje na grupe. Kada utičeš na grupu, ti ne komuniciraš sa jednom osobom, već sa kompleksnom mrežom ljudi, sa različitim stavovima, motivima i skrivenim ciljevima. Uticaj na grupu zahteva širu svest i drugačiji pristup.</p>`,
-                        infographics: [
-                            { icon: 'fa-users-cog', title: 'Grupna Veza', text: 'Uskladi se sa prosečnom energijom i zajedničkim jezikom cele grupe.' },
-                            { icon: 'fa-user-check', title: 'Pronađi Glavnog Igrača', text: 'Uticaj na neformalnog lidera mišljenja i uticaćeš na sve ostale.' },
-                            { icon: 'fa-broadcast-tower', title: 'Široke Metafore', text: 'Koristi priče, vrednosti i metafore koje su važne svima u grupi.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Šta je Grupna Veza?', icon: 'fa-question-circle', tekst: '<p class="kurs-secondary-text">Ne možeš se uskladiti sa svima pojedinačno u isto vreme. Umesto toga, posmatraj i uskladi se sa <strong>prosečnom energijom</strong> i dominantnim stavom grupe. Posmatraj ih kao jednu celinu. Da li su energični, umorni, skeptični? Uskladi svoj govor tela i glas sa tom opštom atmosferom. Koristi jezik i metafore koje su zajedničke svima, stvarajući osećaj jedinstva i zajedničkog cilja.</p>' },
-                        { naslov: 'Identifikacija Glavnog Igrača', icon: 'fa-search', tekst: '<p class="kurs-secondary-text">U svakoj grupi postoji osoba čije mišljenje drugi najviše cene i čiju reakciju prvo gledaju. To ne mora biti formalni šef. Posmatraj: Na koga su upućeni pogledi nakon što postaviš pitanje? Čije se reči najpažljivije slušaju? Ko prvi klima glavom? Ubedi tu osobu, i dobićeš celu grupu. Posveti joj malo više pažnje, klimaj glavom dok priča, koristi njeno ime.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">U klasičnom filmu "12 gnevnih ljudi", jedan porotnik (Henry Fonda) uspeva da ubedi ostalih 11 da promene mišljenje od "kriv je" do "nije kriv". On to ne radi agresivno napadajući celu grupu. Prvo stvara vezu sa jednim po jednim, pronalazi one koji su najotvoreniji za promenu (glavne igrače) i polako, strpljivo, koristeći logiku i menjanje okvira, utiče na celu grupu, jednog po jednog, dok ne preokrene većinu.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas posmatramo dinamiku čopora i vežbamo grupni uticaj.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba posmatranja - Ko je Pravi Vođa?:</strong> Na sledećem sastanku ili u grupnom druženju, tvoj jedini zadatak je da ne učestvuješ previše, već da posmatraš. Pokušaj da identifikuješ glavnog igrača. Zapiši signale na osnovu kojih si to zaključio.</li><li><strong>Aktivni Zadatak - "Mi" Jezik:</strong> U razgovoru sa više od jedne osobe, svesno izbegavaj reči "ja" i "moj", a umesto njih koristi "mi", "naš" i "zajedno" bar pet puta. Na primer, umesto "Moj predlog je...", reci "Naš sledeći korak bi mogao biti...". Obrati pažnju kako ovo utiče na osećaj zajedništva.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Da li si uspeo da identifikuješ glavnog igrača? Po kojim tačno signalima?</li><li>Kako je svesna upotreba "mi jezika" uticala na atmosferu i dinamiku u grupi?</li><li>Da li ti je lakše da utičeš na pojedinca ili na grupu? Zašto? Šta su prednosti, a šta mane?</li></ul>`;
-                    break;
-                case 20:
-                    content.uvod = {
-                        naslov: 'Koristi Moć za Dobro',
-                        tekst: `<p class="kurs-secondary-text">Stigli smo do najvažnije lekcije celog kursa. Svo znanje koje si stekao je izuzetno moćno. Može se koristiti za izgradnju, inspiraciju i pomaganje, ali i za obmanu i iskorišćavanje. A sa velikom moći dolazi i velika odgovornost. Razlika između uticaja i manipulacije ne leži u tehnici, već isključivo u <strong>nameri</strong>.</p>`,
-                        infographics: [
-                            { icon: 'fa-compass-drafting', title: 'Alati, ne Oružje', text: 'Koristi ove tehnike da pomogneš sebi i drugima da ostvare pozitivne ishode.' },
-                            { icon: 'fa-check-double', title: 'Provera Dobrih Namera', text: 'Da li je ishod dobar za sve uključene strane, dugoročno?' },
-                            { icon: 'fa-user-shield', title: 'Tvoja Reputacija', text: 'Dugoročni uticaj i nasleđe se grade na poverenju i integritetu, ne na trikovima.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Uticaj vs. Manipulacija', icon: 'fa-balance-scale', tekst: '<p class="kurs-secondary-text">Ovo je ključna razlika: <strong>Manipulacija</strong> je korišćenje ovih tehnika da bi se neko naveo da uradi nešto što je dobro samo za tebe, a potencijalno štetno ili neutralno za njega (ti dobijaš, on gubi). <strong>Etički uticaj</strong> je korišćenje istih tehnika da bi se stvorila situacija gde svi dobijaju, gde ishod donosi stvarnu i dugoročnu korist svim uključenim stranama.</p>' },
-                        { naslov: 'Provera Dobrih Namera: Tvoj Moralni Kompas', icon: 'fa-leaf', tekst: '<p class="kurs-secondary-text">Pre svake važne komunikacije gde želiš da primeniš ove tehnike, uradi brzu <strong>proveru dobrih namera</strong>. Postavi sebi tri pitanja: <strong>1. Da li je ovaj ishod dugoročno dobar za mene? 2. Da li je ovaj ishod dugoročno dobar za drugu osobu/grupu? 3. Da li je ovaj ishod dobar (ili bar neutralan) za šire okruženje (kompaniju, porodicu, društvo)?</strong> Ako je odgovor na sva tri pitanja "da", onda si na putu etičkog uticaja. Ako je odgovor na bilo koje "ne", stani.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Alfred Nobel je izumeo dinamit sa iskrenom namerom da pomogne u rudarstvu i građevini. Kada je video da se njegov izum masovno koristi za uništenje u ratovima, bio je užasnut. Shvatio je da će ostati upamćen kao "trgovac smrću". Kao čin iskupljenja i etičkog menjanja okvira svog nasleđa, osnovao je Nobelovu nagradu, koristeći svoje ogromno bogatstvo da promoviše mir i napredak. Alat je bio neutralan, ali je namera upotrebe definisala njegovo nasleđe.</p>' },
-                        { naslov: 'Tvoj Detaljni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Danas ne vežbamo tehniku, već definišemo svoj moralni kompas.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Vežba "Test Javnosti":</strong> Razmisli o nekoj situaciji u prošlosti gde si pokušao da utičeš na nekoga. Zamisli da postoji snimak te interakcije. Da li bi bio ponosan da se taj snimak pojavi u javnosti i da ga vide ljudi koje poštuješ? Odgovor na ovo pitanje je odličan pokazatelj etičnosti tvojih postupaka.</li><li><strong>Definiši Svoja Pravila:</strong> Napiši svoja <strong>tri zlatna pravila</strong> etičkog uticaja. To su tvoji principi kojih ćeš se uvek držati. Na primer: 1. Uvek ostavi osobu u boljem stanju nego što si je zatekao. 2. Moj uticaj mora služiti obostranoj koristi. 3. Nikada neću koristiti ove tehnike da bih nekoga obmanuo ili iskoristio. Okači ih negde gde ćeš ih videti svaki dan.</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Kako je prošao "Test Javnosti" za tvoju prošlu situaciju? Šta bi uradio drugačije danas?</li><li>Koja su tvoja tri zlatna pravila? Zašto si izabrao baš njih?</li><li>Zašto je dugoročno poverenje i reputacija uvek važnije od kratkoročne pobede?</li></ul>`;
-                    break;
-                case 21:
-                    content.uvod = {
-                        naslov: 'Kada Sve Postane Prirodno',
-                        tekst: `<p class="kurs-secondary-text">Stigli smo do kraja, Majstore Uticaja. Prošao si 21 dan intenzivnog treninga. Ali ovo nije kraj, ovo je <strong>početak tvog novog načina postojanja</strong>. Cilj ovog kursa nije bio da te napuni trikovima i tehnikama. Cilj je bio da se desi fundamentalna promena u tebi, da postaneš osoba kojoj je pozitivan uticaj prirodna posledica onoga što ona jeste.</p>`,
-                        infographics: [
-                            { icon: 'fa-id-card-alt', title: 'To si Sada Ti', text: 'Ovo više nisu tehnike koje primenjuješ, ovo je tvoj novi identitet.' },
-                            { icon: 'fa-infinity', title: 'Vežba je Večna', text: 'Uticaj je kao mišić koji zahteva stalan i svestan trening da bi ostao jak.' },
-                            { icon: 'fa-monument', title: 'Početak Tvog Nasleđa', text: 'Tvoj uticaj na druge ljude je tvoje pravo nasleđe. Gradi ga mudro.' }
-                        ]
-                    };
-                    content.podnaslovi = [
-                        { naslov: 'Od "Raditi" do "Biti"', icon: 'fa-street-view', tekst: '<p class="kurs-secondary-text">Prava transformacija se dešava kada prestaneš da razmišljaš o tehnikama. Ovo više nisu "tehnike" koje primenjuješ. Ovo je sada tvoj operativni sistem. To je prelazak sa "raditi uticaj" na "biti uticajan". Ti si osoba koja prirodno stvara vezu, koja sluša sa dubokom namerom da razume, čiji jezik inspiriše, i čija je namera uvek časna i usmerena ka obostranoj koristi.</p>' },
-                        { naslov: 'Put se Nastavlja', icon: 'fa-route', tekst: '<p class="kurs-secondary-text">Zaboravi na dane i lekcije. Sada je vreme za integraciju. Samo budi. Budi prisutan u svakom razgovoru. Budi radoznao o svetu druge osobe. Budi etičan u svojim namerama. Nastavi da posmatraš, vežbaš i da se reflektuješ. Svaka interakcija je prilika za trening. Svaki razgovor je prilika da ostaviš pozitivan trag i učiniš nečiji dan, a možda i život, boljim.</p>' },
-                        { naslov: 'Anegdota', icon: 'fa-user-secret', tekst: '<p class="kurs-secondary-text">Brus Li nije postao legenda tako što je samo znao hiljade udaraca. Postao je legenda kada je prestao da razmišlja o udarcima i postao sama umetnost borbe. Njegov čuveni citat je: "Ne plašim se čoveka koji je vežbao 10.000 udaraca jednom. Plašim se čoveka koji je vežbao jedan udarac 10.000 puta." Fokusiraj se na dosledno primenjivanje ovih osnovnih principa (povezivanje, čitanje ljudi, etika) dok ne postanu deo tebe, tvoja druga priroda.</p>' },
-                        { naslov: 'Tvoj Završni Trening', icon: 'fa-dumbbell', tekst: '<p class="kurs-secondary-text">Tvoj poslednji zadatak je da integrišeš naučeno i postaviš kurs za budućnost.</p><ol class="list-decimal list-inside space-y-3 kurs-secondary-text mt-2"><li><strong>Pismo Sebi:</strong> Napiši detaljno pismo "Sebi za godinu dana". Opiši majstora uticaja kakav si postao. Kakve odnose si izgradio? Kakve pozitivne promene si stvorio u svom životu i životima drugih? Budi specifičan. Zatvori ga i otvori za godinu dana.</li><li><strong>Manifest Uticaja:</strong> Napiši u jednoj, moćnoj rečenici svoju ličnu misiju uticaja. To je tvoja zvezda vodilja. Primer: "Moj uticaj služi da otključa potencijal, inspiriše promenu i stvori duboke veze zasnovane na poverenju i poštovanju."</li></ol>' }
-                    ];
-                    content.dnevnikPitanja = `<p class="kurs-secondary-text text-sm">Zapiši večeras:</p><ul class="list-disc list-inside space-y-2 kurs-secondary-text text-sm"><li>Koja je najvažnija istina o komunikaciji i ljudskoj prirodi koju si naučio u ova 21 dana?</li><li>Kako ćeš osigurati da nastaviš da rasteš i da ne zaboraviš ove lekcije? Koji sistem ćeš uspostaviti?</li><li>Opiši u tri reči osobu kakva si postao zahvaljujući ovom putovanju.</li></ul>`;
-                    break;
-            }
-            return content;
         }
-
     </script>
 </body>
 </html>
