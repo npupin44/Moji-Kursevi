@@ -1,640 +1,264 @@
-
 <!DOCTYPE html>
-<html lang="sr" class="scroll-smooth">
+<html lang="sr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCENDRIX - Otključaj Svoj Maksimalni Uticaj</title>
+    <title>ASCENDRIX ACADEMY | Pristup</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-dark: #101010;
-            --bg-glass: rgba(20, 20, 20, 0.5);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --text-primary: #F5F5F5;
-            --text-secondary: #A1A1A1;
-            --primary-accent: #00F5D4; /* Vibrant Teal */
-            --secondary-accent: #F72585; /* Bright Pink */
-        }
-        body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .glass-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            border-color: rgba(0, 245, 212, 0.5);
-        }
-        .btn-gradient {
-            background-image: linear-gradient(to right, var(--primary-accent) 0%, var(--secondary-accent) 100%);
-            color: #101010;
-            font-weight: 700;
-            border: none;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 25px 0 rgba(0, 245, 212, 0.2);
-            cursor: pointer;
-        }
-        .btn-gradient:hover:not(:disabled) {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 10px 35px 0 rgba(247, 37, 133, 0.3);
-        }
-        .btn-gradient:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .text-gradient {
-            background: -webkit-linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-primary-accent { color: var(--primary-accent); }
-        .text-secondary-accent { color: var(--secondary-accent); }
-
-        .popular-card {
-            border-width: 2px;
-            border-color: transparent;
-            background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
-                        linear-gradient(to right, var(--primary-accent), var(--secondary-accent)) border-box;
-            transform: scale(1.05);
-        }
-        [x-cloak] { display: none !important; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary-accent); }
-    </style>
-</head>
-
-<body x-data="appData()" x-init="init()">
-    <canvas id="bg-canvas"></canvas>
-
-    <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50">
-        <div class="container mx-auto px-6 py-4 glass-card !rounded-t-none !border-x-0 !border-t-0">
-            <div class="flex items-center justify-between">
-                <div class="md:w-1/3">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                            class="md:hidden text-white focus:outline-none z-50"
-                            aria-controls="mobile-menu" 
-                            :aria-expanded="mobileMenuOpen.toString()">
-                        <span class="sr-only">Otvori/zatvori meni</span>
-                        <i class="fas text-xl" :class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
-                    </button>
-                </div>
-                <div class="md:w-1/3 text-center">
-                    <a href="#" class="text-2xl font-bold tracking-wider text-gradient">ASCENDRIX</a>
-                </div>
-                <div class="md:w-1/3 flex items-center justify-end">
-                    <nav class="hidden md:flex items-center space-x-8">
-                        <a href="#features" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Šta učiš?</a>
-                        <a href="#courses" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Kursevi</a>
-                        <a href="#testimonials" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Iskustva</a>
-                        <a href="#faq" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">FAQ</a>
-                    </nav>
-                    <a href="#courses" class="hidden lg:block ml-8 px-6 py-2 btn-gradient rounded-full text-sm">Pogledaj Kurseve</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Nav-->
-    <div id="mobile-menu" x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 transform -translate-y-full"
-         x-transition:enter-end="opacity-100 transform translate-y-0"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100 transform translate-y-0"
-         x-transition:leave-end="opacity-0 transform -translate-y-full"
-         class="fixed top-0 left-0 right-0 bottom-0 z-40 bg-bg-dark/90 backdrop-blur-lg flex flex-col items-center justify-center">
-        <nav class="flex flex-col items-center space-y-8">
-            <a @click="mobileMenuOpen = false" href="#features" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">Šta učiš?</a>
-            <a @click="mobileMenuOpen = false" href="#courses" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">Kursevi</a>
-            <a @click="mobileMenuOpen = false" href="#testimonials" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">Iskustva</a>
-            <a @click="mobileMenuOpen = false" href="#faq" class="text-2xl font-medium text-gray-300 hover:text-white transition-colors">FAQ</a>
-            <a @click="mobileMenuOpen = false" href="#courses" class="mt-8 px-8 py-3 btn-gradient rounded-full text-lg">Pogledaj Kurseve</a>
-        </nav>
-    </div>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="text-center z-20 relative px-6">
-                <h1 id="hero-title" class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
-                    Postani Verzija Sebe <span class="text-gradient">Kojoj Se Diviš</span>
-                </h1>
-                <p id="hero-subtitle" class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-text-secondary">
-                    Prestani da budeš nevidljiv. Naši kursevi ti daju konkretne alate iz psihologije i komunikacije da postaneš magnet za ljude, uspeh i prilike.
-                </p>
-                <div id="hero-cta" class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#courses" class="w-full sm:w-auto px-10 py-4 btn-gradient rounded-full text-lg">
-                        <i class="fas fa-rocket mr-2" aria-hidden="true"></i> Započni Transformaciju
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="py-24 animated-section">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold">Šta Zapravo Dobijaš?</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-text-secondary">
-                        Ovo nisu dosadna predavanja. Ovo su operativni sistemi za reprogramiranje tvog mozga.
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="glass-card p-8 text-center">
-                        <div class="text-4xl mb-4 text-primary-accent"><i class="fas fa-magnet" aria-hidden="true"></i></div>
-                        <h3 class="text-xl font-bold mb-2">Postani Magnet za Ljude</h3>
-                        <p class="text-sm text-text-secondary">Zaboravi na neprijatnu tišinu. Nauči kako da za 5 minuta stvoriš duboku, nesvesnu konekciju sa bilo kim. Zamisli da ti ljudi veruju i žele da budu u tvom društvu. To je tvoja nova realnost.</p>
-                    </div>
-                    <div class="glass-card p-8 text-center">
-                        <div class="text-4xl mb-4 text-secondary-accent"><i class="fas fa-brain" aria-hidden="true"></i></div>
-                        <h3 class="text-xl font-bold mb-2">Uđi Ljudima u Glavu (Etički)</h3>
-                        <p class="text-sm text-text-secondary">Otkrij tajne psihološke okidače koji kontrolišu odluke. Kada razumeš kako mozak radi, ubeđivanje postaje igra. Nauči da vodiš ljude ka 'DA' na način da se osećaju sjajno zbog toga.</p>
-                    </div>
-                    <div class="glass-card p-8 text-center">
-                        <div class="text-4xl mb-4 text-primary-accent"><i class="fas fa-bomb" aria-hidden="true"></i></div>
-                        <h3 class="text-xl font-bold mb-2">Reči Koje Menjaju Stvarnost</h3>
-                        <p class="text-sm text-text-secondary">Tvoje reči su alat. Ili oružje. Mi te učimo kako da ih koristiš sa hirurškom preciznošću. Ubaci ideje direktno u um sagovornika i učini da tvoji predlozi zvuče kao njihova genijalna ideja.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Courses (Pricing) Section -->
-        <section id="courses" class="py-24 bg-black/10 animated-section">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold">Izaberi Svoj Put Razvoja</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-text-secondary">
-                        Paketi znanja dizajnirani za specifične ciljeve. Tvoja prečica do sledećeg nivoa.
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-                    <article class="glass-card flex flex-col p-8">
-                        <div class="text-center flex-grow">
-                            <i class="fas fa-gavel text-4xl mb-4 text-secondary-accent" aria-hidden="true"></i>
-                            <h3 class="text-2xl font-bold mb-2">Komunikacija Autoriteta</h3>
-                            <p class="text-4xl font-bold my-4">€25</p>
-                            <ul class="space-y-3 text-sm mb-6 text-left">
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Izgradi nezaustavljivo samopouzdanje i nauči da tvoje reči imaju težinu.</li>
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Postani osoba koju slušaju, poštuju i prate.</li>
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uključuje interaktivnu konzolu i 100+ praktičnih trikova.</li>
-                            </ul>
-                        </div>
-                        <div class="mt-auto pt-6">
-                             <button @click="openModal('Komunikacija Autoriteta', '25')" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">Naruči Kurs</button>
-                        </div>
-                    </article>
-                    <article class="popular-card glass-card flex flex-col p-8">
-                        <div class="text-center flex-grow">
-                            <i class="fas fa-rocket text-4xl mb-4 text-primary-accent" aria-hidden="true"></i>
-                            <h3 class="text-2xl font-bold mb-2">Maksimalni Uticaj</h3>
-                            <p class="text-5xl font-bold my-4">€35</p>
-                            <ul class="space-y-3 text-sm mb-6 text-left">
-                                <li class="flex items-start"><i class="fas fa-star mt-1 mr-3 text-yellow-400" aria-hidden="true"></i> <strong>Kompletan 21-dnevni sistem za majstorstvo komunikacije.</strong></li>
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Nauči da se povežeš, ubediš i inspirišeš bilo koga.</li>
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uključuje interaktivnu konzolu i 105+ praktičnih trikova.</li>
-                            </ul>
-                        </div>
-                        <div class="mt-auto pt-6">
-                            <button @click="openModal('Maksimalni Uticaj', '35')" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">Naruči Kurs</button>
-                        </div>
-                    </article>
-                    <article class="glass-card flex flex-col p-8">
-                        <div class="text-center flex-grow">
-                            <i class="fas fa-star text-4xl mb-4 text-secondary-accent" aria-hidden="true"></i>
-                            <h3 class="text-2xl font-bold mb-2">Zakon Privlačnosti</h3>
-                            <p class="text-4xl font-bold my-4">€30</p>
-                            <ul class="space-y-3 text-sm mb-6 text-left">
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Postani svesni kreator svoje stvarnosti i magnet za čuda.</li>
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uskladi misli i osećanja sa Univerzumom i privuci život iz snova.</li>
-                                <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3 text-green-400" aria-hidden="true"></i> Uključuje interaktivnu konzolu i 105+ praktičnih trikova.</li>
-                            </ul>
-                        </div>
-                         <div class="mt-auto pt-6">
-                            <button @click="openModal('Zakon Privlačnosti', '30')" class="block w-full text-center px-6 py-3 btn-gradient rounded-full">Naruči Kurs</button>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section-->
-        <section id="testimonials" class="py-24 animated-section">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold">Ne Veruj Nama Na Reč</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-text-secondary">
-                        Iskustva ljudi koji su već prošli transformaciju.
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="glass-card p-8">
-                        <p class="text-text-secondary text-sm mb-4">"Kurs 'Maksimalni Uticaj' mi je otvorio oči. Mislio sam da znam da komuniciram, ali tek sada vidim koliko sam propuštao. Sastanci sa klijentima su postali 10x produktivniji."</p>
-                        <div class="flex items-center">
-                            <img src="https://placehold.co/40x40/F72585/101010?text=M" alt="Profilna slika korisnika Marko P." class="w-10 h-10 rounded-full mr-4 border-2 border-secondary-accent">
-                            <div>
-                                <h4 class="font-bold text-sm">Marko P.</h4>
-                                <p class="text-xs text-primary-accent">Preduzetnik</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-8">
-                        <p class="text-text-secondary text-sm mb-4">"Kao neko ko je uvek bio stidljiv, tehnike iz 'Komunikacije Autoriteta' su mi dale samopouzdanje koje mi je nedostajalo. Osećam se mnogo prijatnije u društvu."</p>
-                        <div class="flex items-center">
-                            <img src="https://placehold.co/40x40/00F5D4/101010?text=J" alt="Profilna slika korisnice Jelena K." class="w-10 h-10 rounded-full mr-4 border-2 border-primary-accent">
-                            <div>
-                                <h4 class="font-bold text-sm">Jelena K.</h4>
-                                <p class="text-xs text-primary-accent">Student</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-8">
-                        <p class="text-text-secondary text-sm mb-4">"Zakon Privlačnosti mi je promenio život. Nisam verovala u 'te stvari', ali dnevne vežbe su mi donele više mira i neverovatne prilike. Preporučujem!"</p>
-                        <div class="flex items-center">
-                            <img src="https://placehold.co/40x40/F72585/101010?text=S" alt="Profilna slika korisnika Stefan M." class="w-10 h-10 rounded-full mr-4 border-2 border-secondary-accent">
-                            <div>
-                                <h4 class="font-bold text-sm">Stefan M.</h4>
-                                <p class="text-xs text-primary-accent">Menadžer prodaje</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section-->
-        <section id="faq" class="py-24 bg-black/10 animated-section">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold">Imate Pitanja? Imamo Odgovore.</h2>
-                </div>
-                <div x-data="{ open: 1 }" class="max-w-3xl mx-auto glass-card p-6 md:p-8">
-                    <div class="border-b border-border-color py-4">
-                        <h3 class="text-lg font-medium">
-                            <button @click="open = (open === 1 ? null : 1)" class="w-full flex justify-between items-center text-left">
-                                <span>Za koga su ovi kursevi?</span>
-                                <i class="fas transition-transform" :class="open === 1 ? 'fa-chevron-up' : 'fa-chevron-down'" aria-hidden="true"></i>
-                            </button>
-                        </h3>
-                        <div x-show="open === 1" x-collapse class="pt-3 text-sm text-text-secondary">
-                            <p>Kursevi su za sve koji žele da unaprede svoje veštine - preduzetnike, studente, menadžere, prodavce, ali i sve one koji žele da izgrade jače privatne odnose i postanu samopouzdaniji u svakodnevnim interakcijama.</p>
-                        </div>
-                    </div>
-                    <div class="py-4">
-                         <h3 class="text-lg font-medium">
-                            <button @click="open = (open === 2 ? null : 2)" class="w-full flex justify-between items-center text-left">
-                                <span>Koliko vremena dnevno je potrebno?</span>
-                                <i class="fas transition-transform" :class="open === 2 ? 'fa-chevron-up' : 'fa-chevron-down'" aria-hidden="true"></i>
-                            </button>
-                        </h3>
-                        <div x-show="open === 2" x-collapse class="pt-3 text-sm text-text-secondary">
-                            <p>Svaka lekcija je dizajnirana da zahteva oko 15-20 minuta vašeg vremena za teoriju, plus vreme koje posvetite praktičnoj primeni tokom dana. Fleksibilno je i možete ga prilagoditi svom rasporedu.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-border-color py-10">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-2xl font-bold tracking-wider text-gradient mb-4">ASCENDRIX</p>
-            <div class="flex items-center justify-center space-x-6 mb-4">
-                <a href="https://www.tiktok.com/@ascendrixv1.0?_t=ZM-9007bNPC5KG&_r=1" target="_blank" class="text-gray-400 hover:text-white transition-colors text-2xl"><span class="sr-only">TikTok</span><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-            </div>
-            <p class="text-sm text-gray-500">&copy; 2025 ASCENDRIX. Sva prava zadržana.</p>
-        </div>
-    </footer>
-    
-    <!-- Payment Modal -->
-    <div x-show="modalOpen" x-cloak
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0"
-         class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-         role="dialog" aria-modal="true" :aria-labelledby="modal-title">
-        
-        <div @click.away="modalOpen = false"
-             x-show="modalOpen"
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 transform scale-95"
-             x-transition:enter-end="opacity-100 transform scale-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100 transform scale-100"
-             x-transition:leave-end="opacity-0 transform scale-95"
-             class="glass-card w-full max-w-lg p-6 md:p-8 relative max-h-[90vh] overflow-y-auto">
-             
-            <button @click="closeModalAndResetForm()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
-                <span class="sr-only">Zatvori prozor</span>
-                <i class="fas fa-times text-2xl" aria-hidden="true"></i>
-            </button>
-            
-            <div x-show="formStatus !== 'success'">
-                <h3 id="modal-title" class="text-2xl font-bold text-center mb-6">Uputstvo za Naručivanje</h3>
-                
-                <div class="text-sm text-text-secondary space-y-4">
-                    <p>Pratite sledeće korake da biste uspešno naručili kurs "<strong x-text="selectedCourseName" class="text-primary-accent"></strong>".</p>
-                    
-                    <div class="border border-border-color rounded-lg p-4">
-                        <p class="font-bold text-text-primary mb-2">Korak 1: Podaci za uplatu</p>
-                        <p>Posetite najbližu poštu, banku ili menjačnicu koja pruža usluge Western Union-a i izvršite uplatu koristeći sledeće podatke:</p>
-                        <ul class="list-disc list-inside mt-2 space-y-1 text-text-primary">
-                            <li><strong>Ime primaoca:</strong> Nikola</li>
-                            <li><strong>Prezime primaoca:</strong> Spiridonović</li>
-                            <li><strong>Grad:</strong> Beograd</li>
-                            <li><strong>Država:</strong> Srbija</li>
-                            <li><strong>Iznos za uplatu:</strong> <span x-text="selectedCoursePrice" class="font-bold"></span> EUR (u dinarskoj protivvrednosti)</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="border border-border-color rounded-lg p-4">
-                        <p class="font-bold text-text-primary mb-2">Korak 2: Potvrda narudžbine</p>
-                        <p>Nakon uplate, dobićete potvrdu sa <strong>kontrolnim brojem transfera novca (MTCN)</strong>. Popunite formu ispod sa traženim podacima i tim brojem da biste završili narudžbinu.</p>
-                    </div>
-                </div>
-
-                <form @submit.prevent="handleFormSubmit()" class="mt-6 space-y-4">
-                    <input type="hidden" x-model="formData.courseName">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-text-secondary mb-1">Vaše Ime i Prezime</label>
-                        <input type="text" id="name" name="name" x-model="formData.name" required class="w-full bg-black/20 border border-border-color rounded-lg px-4 py-2 text-text-primary focus:ring-2 focus:ring-primary-accent focus:border-primary-accent outline-none transition">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-text-secondary mb-1">Vaš Email (gde šaljemo kurs)</label>
-                        <input type="email" id="email" name="email" x-model="formData.email" required class="w-full bg-black/20 border border-border-color rounded-lg px-4 py-2 text-text-primary focus:ring-2 focus:ring-primary-accent focus:border-primary-accent outline-none transition">
-                    </div>
-                    <div>
-                        <label for="mtcn" class="block text-sm font-medium text-text-secondary mb-1">Kontrolni broj (MTCN)</label>
-                        <input type="text" id="mtcn" name="mtcn" x-model="formData.mtcn" required class="w-full bg-black/20 border border-border-color rounded-lg px-4 py-2 text-text-primary focus:ring-2 focus:ring-primary-accent focus:border-primary-accent outline-none transition">
-                    </div>
-                    <div class="pt-4">
-                        <button type="submit" :disabled="formStatus === 'submitting'" class="w-full text-center px-6 py-3 btn-gradient rounded-full flex items-center justify-center">
-                            <span x-show="formStatus !== 'submitting'"><i class="fas fa-paper-plane mr-2"></i> Potvrdi i Pošalji Podatke</span>
-                            <span x-show="formStatus === 'submitting'">
-                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Slanje...
-                            </span>
-                        </button>
-                    </div>
-                     <p x-show="formStatus === 'error'" class="text-center text-sm text-red-400 mt-2">Došlo je do greške. Molimo pokušajte ponovo ili pošaljite podatke direktno na email: nklpupin@gmail.com</p>
-                </form>
-            </div>
-
-            <div x-show="formStatus === 'success'" class="text-center">
-                 <div class="text-6xl mb-4 text-primary-accent"><i class="fas fa-check-circle"></i></div>
-                 <h3 class="text-2xl font-bold mb-2">Hvala Vam!</h3>
-                 <p class="text-text-secondary">Vaša narudžbina je uspešno primljena. Kurs će Vam biti poslat na email <strong x-text="formData.email" class="text-text-primary"></strong> u roku od 24 sata.</p>
-                 <button @click="closeModalAndResetForm()" class="mt-6 px-8 py-2 btn-gradient rounded-full">Zatvori</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Montserrat:wght@300;400;500;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        function appData() {
-            return {
-                mobileMenuOpen: false,
-                modalOpen: false,
-                selectedCourseName: '',
-                selectedCoursePrice: '',
-                formStatus: 'idle', // idle, submitting, success, error
-                formData: {
-                    name: '',
-                    email: '',
-                    mtcn: '',
-                    courseName: ''
-                },
-                
-                openModal(name, price) {
-                    this.selectedCourseName = name;
-                    this.selectedCoursePrice = price;
-                    this.formData.courseName = name;
-                    this.modalOpen = true;
-                },
-                
-                closeModalAndResetForm() {
-                    this.modalOpen = false;
-                    setTimeout(() => {
-                        this.formStatus = 'idle';
-                        this.formData.name = '';
-                        this.formData.email = '';
-                        this.formData.mtcn = '';
-                    }, 300); // Delay for closing animation
-                },
-
-                handleFormSubmit() {
-                    this.formStatus = 'submitting';
-                    
-                    // ####################################################################################
-                    // ############################ OBAVEZNO PROCITATI ####################################
-                    // ####################################################################################
-                    //
-                    // DA BI FORMA RADILA, MORATE ZAMENITI LINK ISPOD SVOJIM JEDINSTVENIM LINKOM.
-                    // TRENUTNO JE POSTAVLJEN TESTNI LINK I PORUKE VAM NECE STIZATI.
-                    //
-                    // KORACI:
-                    // 1. Idite na sajt: https://formspree.io/
-                    // 2. Napravite BESPLATAN nalog sa emailom na koji primate narudžbine (npr. nklpupin@gmail.com).
-                    // 3. Potvrdite email i kreirajte novu formu ("+ New Form").
-                    // 4. Dobićete jedinstveni URL koji izgleda ovako: https://formspree.io/f/xxxxxxxx
-                    // 5. ZAMENITE LINK 'https://formspree.io/f/xgegqjqb' ISPOD SA VAŠIM NOVIM LINKOM.
-                    //
-                    // AKO OVO NE URADITE, FORMA NEĆE RADITI I NEĆETE DOBIJATI NARUDŽBINE.
-                    //
-                    const formspreeEndpoint = 'https://formspree.io/f/xrbybapo'; 
-                    // ####################################################################################
-                    // ####################################################################################
-
-                    fetch(formspreeEndpoint, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#C5A059',
+                            light: '#E6C676',
+                            dark: '#8A6E2F',
+                            dim: 'rgba(197, 160, 89, 0.1)'
                         },
-                        body: JSON.stringify({
-                            "Ime i Prezime": this.formData.name,
-                            "Email": this.formData.email,
-                            "MTCN Broj": this.formData.mtcn,
-                            "Naručeni Kurs": this.formData.courseName,
-                            "_subject": `Nova narudžbina za kurs: ${this.formData.courseName}`
-                        })
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            this.formStatus = 'success';
-                        } else {
-                            response.json().then(data => {
-                                if (Object.hasOwn(data, 'errors')) {
-                                    console.log(data.errors.map(error => error.message).join(", "));
-                                }
-                                this.formStatus = 'error';
-                            })
+                        black: {
+                            DEFAULT: '#000000',
+                            card: '#0a0a0a'
                         }
-                    })
-                    .catch(error => {
-                        console.error('Došlo je do greške pri slanju forme:', error);
-                        this.formStatus = 'error';
-                    });
-                },
-
-                init() {
-                    this.initGsapAnimations();
-                    this.init3DBackground();
-                },
-
-                initGsapAnimations() {
-                    if (typeof gsap === 'undefined') { 
-                        console.error("GSAP library not loaded.");
-                        return;
-                    }
-                    gsap.registerPlugin(ScrollTrigger);
-                    
-                    document.querySelectorAll('.animated-section').forEach(section => {
-                        gsap.from(section.children, {
-                            scrollTrigger: {
-                                trigger: section,
-                                start: 'top 80%',
-                                end: 'bottom 20%',
-                                toggleActions: 'play none none none'
-                            },
-                            opacity: 0,
-                            y: 50,
-                            duration: 1,
-                            ease: 'power3.out',
-                            stagger: 0.2
-                        });
-                    });
-                },
-
-                init3DBackground() {
-                    if (typeof THREE === 'undefined') {
-                        console.error("Three.js library not loaded.");
-                        return;
-                    }
-
-                    let scene, camera, renderer, particles, mouseX = 0, mouseY = 0;
-                    let animationId = null;
-                    const canvas = document.getElementById('bg-canvas');
-                    if (!canvas) return;
-
-                    function init() {
-                        scene = new THREE.Scene();
-                        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                        camera.position.z = 3.5;
-
-                        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-                        renderer.setPixelRatio(window.devicePixelRatio);
-                        renderer.setSize(window.innerWidth, window.innerHeight);
-
-                        const particleCount = 7000;
-                        const positions = new Float32Array(particleCount * 3);
-                        const colors = new Float32Array(particleCount * 3);
-                        const color1 = new THREE.Color(0x00F5D4);
-                        const color2 = new THREE.Color(0xF72585);
-
-                        for (let i = 0; i < particleCount; i++) {
-                            positions[i * 3] = (Math.random() - 0.5) * 10;
-                            positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-                            positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-                            const mixedColor = color1.clone().lerp(color2, Math.random());
-                            colors[i * 3] = mixedColor.r;
-                            colors[i * 3 + 1] = mixedColor.g;
-                            colors[i * 3 + 2] = mixedColor.b;
-                        }
-
-                        const geometry = new THREE.BufferGeometry();
-                        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-                        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-                        const material = new THREE.PointsMaterial({ size: 0.015, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true, opacity: 0.8 });
-                        particles = new THREE.Points(geometry, material);
-                        scene.add(particles);
-                    }
-
-                    function animate() {
-                        animationId = requestAnimationFrame(animate);
-                        const time = Date.now() * 0.0001;
-                        if (particles) {
-                           particles.rotation.x = time * 0.25;
-                           particles.rotation.y = time * 0.5;
-                        }
-                        camera.position.x += (mouseX - camera.position.x) * 0.01;
-                        camera.position.y += (-mouseY - camera.position.y) * 0.01;
-                        camera.lookAt(scene.position);
-                        renderer.render(scene, camera);
-                    }
-
-                    function onWindowResize() {
-                        camera.aspect = window.innerWidth / window.innerHeight;
-                        camera.updateProjectionMatrix();
-                        renderer.setSize(window.innerWidth, window.innerHeight);
-                    }
-                    
-                    function onDocumentMouseMove(event) {
-                        mouseX = (event.clientX - window.innerWidth / 2) / 500;
-                        mouseY = (event.clientY - window.innerHeight / 2) / 500;
-                    }
-
-                    function handleVisibilityChange() {
-                        if (document.hidden) {
-                            cancelAnimationFrame(animationId);
-                            animationId = null;
-                        } else {
-                            if (!animationId) {
-                                animate();
-                            }
+                    },
+                    fontFamily: {
+                        heading: ['Oswald', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                        brand: ['Cinzel', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                        'shine': 'shine 3s linear infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(197, 160, 89, 0.1)' },
+                            '50%': { boxShadow: '0 0 40px rgba(197, 160, 89, 0.3)' }
+                        },
+                        shine: {
+                            '0%': { backgroundPosition: '200% center' },
+                            '100%': { backgroundPosition: '-200% center' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
                         }
                     }
-
-                    init();
-                    animate();
-                    window.addEventListener('resize', onWindowResize);
-                    document.addEventListener('mousemove', onDocumentMouseMove);
-                    document.addEventListener("visibilitychange", handleVisibilityChange);
                 }
-            };
+            }
         }
     </script>
+
+    <style>
+        body { 
+            background-color: #000; 
+            color: #e5e5e5; 
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.15), transparent 40%),
+                radial-gradient(circle at 0% 90%, rgba(197, 160, 89, 0.05), transparent 30%);
+        }
+
+        /* --- GLASS CARD --- */
+        .glass-card {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, #C5A059, transparent);
+            opacity: 0.5;
+        }
+
+        /* --- INPUT --- */
+        .input-group {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field {
+            background: rgba(0, 0, 0, 0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            color: white; 
+            width: 100%; 
+            padding: 18px 18px 18px 50px;
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 16px; 
+            transition: all 0.3s; 
+            outline: none;
+            border-radius: 4px;
+        }
+        
+        .input-field:focus { 
+            border-color: #C5A059; 
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            transition: 0.3s;
+        }
+
+        .input-field:focus + .input-icon {
+            color: #C5A059;
+        }
+
+        /* --- BUTTON --- */
+        .btn-gold-gradient {
+            background: linear-gradient(135deg, #8A6E2F 0%, #C5A059 50%, #F3E5AB 100%);
+            background-size: 200% auto;
+            color: black;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-gold-gradient:hover {
+            background-position: right center;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- VISUALS --- */
+        .cube-visual {
+            position: relative;
+            z-index: 1;
+        }
+        .cube-visual::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px; height: 120px;
+            background: #C5A059;
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: -1;
+            animation: pulseGlow 4s infinite;
+        }
+
+        .highlight-text {
+            color: white;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
+
+    <!-- Subtle Background Texture -->
+    <div class="fixed inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="w-full max-w-md mx-auto relative z-10 animate-fade-in">
+        
+        <!-- LOGO HEADER -->
+        <div class="text-center mb-10">
+            <div class="inline-block relative">
+                <span class="font-brand text-gold text-2xl md:text-3xl tracking-[0.2em] font-bold uppercase drop-shadow-md">Ascendrix</span>
+                <span class="block text-[8px] md:text-[9px] text-gray-500 uppercase tracking-[0.6em] mt-1 text-center bg-black/50 backdrop-blur-sm rounded">Academy</span>
+            </div>
+        </div>
+
+        <!-- THE CARD -->
+        <div class="glass-card rounded-2xl p-8 md:p-10">
+            
+            <!-- Icon/Visual -->
+            <div class="text-center mb-8 cube-visual animate-float">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-xl border border-gold/30 bg-black/40 backdrop-blur-md shadow-lg transform rotate-45 group hover:rotate-0 transition-all duration-700 cursor-pointer">
+                    <i class="fas fa-cube text-4xl text-gold group-hover:scale-110 transition-transform duration-500 transform -rotate-45 group-hover:rotate-0"></i>
+                </div>
+            </div>
+
+            <!-- Headline -->
+            <div class="text-center mb-8">
+                <h1 class="font-heading text-4xl text-white uppercase mb-2 leading-none">
+                    CRNA <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-dark via-gold to-gold-light animate-shine">KUTIJA</span>
+                </h1>
+                <div class="flex items-center justify-center gap-3 mt-4">
+                    <div class="h-px w-8 bg-gold/30"></div>
+                    <p class="text-[10px] text-gold uppercase tracking-[0.2em] font-medium">Mini Interaktivni Kurs</p>
+                    <div class="h-px w-8 bg-gold/30"></div>
+                </div>
+            </div>
+
+            <!-- Copywriting -->
+            <div class="text-gray-400 text-sm leading-relaxed mb-8 font-light text-center px-2">
+                <p class="mb-4">Zamisli da imaš pristup alatima koje <span class="highlight-text font-medium text-gray-200">uticajni ljudi u tvom okruženju</span> koriste intuitivno.</p>
+                <p>Ovo je <strong>interaktivni trening</strong> gde ćeš kroz 6 nivoa <em>instalirati</em> veštine Hipnotičke Komunikacije, Autoriteta i Odbrane.</p>
+            </div>
+
+            <!-- FORM -->
+            <form action="https://formspree.io/f/xrbybapo" method="POST" class="space-y-5">
+                
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Tvoja email adresa..." class="input-field" required>
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+
+                <button type="submit" class="btn-gold-gradient w-full py-4 text-lg rounded-sm shadow-lg">
+                    ZAPOČNI BESPLATNO
+                </button>
+
+                <p class="text-[10px] text-center text-gray-600 uppercase tracking-wider flex items-center justify-center gap-2 mt-4">
+                    <i class="fas fa-lock text-gold/60"></i> Siguran Pristup
+                </p>
+
+            </form>
+
+        </div>
+
+        <!-- TRUST BADGES -->
+        <div class="mt-8 grid grid-cols-3 gap-4 text-center opacity-60">
+            <div class="flex flex-col items-center gap-1">
+                <i class="fas fa-check-circle text-gold text-lg mb-1"></i>
+                <span class="text-[9px] uppercase tracking-widest text-gray-400">6 Lekcija</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 border-x border-white/10">
+                <i class="fas fa-gamepad text-gold text-lg mb-1"></i>
+                <span class="text-[9px] uppercase tracking-widest text-gray-400">Gamified</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <i class="fas fa-shield-alt text-gold text-lg mb-1"></i>
+                <span class="text-[9px] uppercase tracking-widest text-gray-400">Privatno</span>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="mt-10 text-center">
+            <a href="https://tiktok.com/@ascendrixv1.0" target="_blank" class="inline-flex items-center gap-2 text-gray-500 hover:text-gold transition-colors text-sm group">
+                <i class="fab fa-tiktok text-lg group-hover:scale-110 transition-transform"></i>
+                <span class="uppercase text-[10px] tracking-widest">Prati na TikToku</span>
+            </a>
+            <p class="text-[9px] text-gray-700 uppercase tracking-widest mt-4">© 2025 Ascendrix Academy</p>
+        </div>
+
+    </div>
+
 </body>
 </html>
-
-
-
