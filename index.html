@@ -1,70 +1,97 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="sr">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Ascendrix Invitation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCENDRIX | Pristup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Cinzel:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { DEFAULT: '#C5A059', light: '#E6C676', dark: '#8A6E2F' },
+                        black: { DEFAULT: '#000000', card: '#080808' }
+                    },
+                    fontFamily: {
+                        heading: ['Oswald', 'sans-serif'],
+                        brand: ['Cinzel', 'serif'],
+                        body: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000; color: #e5e5e5; }
+        .simple-card {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #000000; font-family: 'Arial', sans-serif;">
-    
-    <!-- GLAVNI CRNI OKVIR -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #000000;">
-        <tr>
-            <td align="center" style="padding: 40px 10px;">
-                
-                <!-- KARTICA -->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #0a0a0a; border: 1px solid #333333; border-radius: 4px;">
-                    
-                    <!-- 1. LOGO -->
-                    <tr>
-                        <td align="center" style="padding: 40px 0 20px 0; border-bottom: 1px solid #C5A059;">
-                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; letter-spacing: 6px; text-transform: uppercase; font-weight: bold;">ASCENDRIX</h1>
-                            <span style="color: #C5A059; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; display: block; margin-top: 5px;">Academy</span>
-                        </td>
-                    </tr>
+<body class="min-h-screen flex items-center justify-center p-4 bg-black">
+    
+    <div class="w-full max-w-md">
+        
+        <!-- GLAVNI CRNI OKVIR -->
+        <div class="simple-card p-0 overflow-hidden">
+            
+            <!-- 1. LOGO -->
+            <div class="text-center py-10 border-b border-gold">
+                <h1 class="font-brand text-3xl text-white tracking-[0.2em] font-bold uppercase">ASCENDRIX</h1>
+                <span class="text-gold text-[10px] tracking-[0.4em] uppercase block mt-1">Academy</span>
+            </div>
 
-                    <!-- 2. TEKST -->
-                    <tr>
-                        <td align="left" style="padding: 40px 30px; color: #dddddd; font-size: 16px; line-height: 1.6;">
-                            <p style="margin-top: 0;">Pristup je odobren.</p>
-                            
-                            <p>Spremili smo 6 taktičkih protokola koji uključuju:</p>
-                            <ul style="color: #C5A059; font-size: 14px; padding-left: 20px;">
-                                <li style="margin-bottom: 8px;">Napredne psihološke tehnike</li>
-                                <li style="margin-bottom: 8px;">Interaktivne provere znanja</li>
-                                <li style="margin-bottom: 8px;">Sistem odbrane od manipulacije</li>
-                            </ul>
-                            
-                            <p>Klikom na dugme ispod ulazite direktno u sistem.</p>
-                        </td>
-                    </tr>
+            <!-- 2. TEKST -->
+            <div class="p-8 text-left">
+                <p class="font-body text-gray-300 text-base mb-6">Pristup je odobren.</p>
+                
+                <p class="font-body text-gray-300 text-base mb-4">Sistem sadrži 6 interaktivnih protokola:</p>
+                
+                <ul class="space-y-3 mb-8 pl-4">
+                    <li class="font-body text-gold text-sm flex items-start gap-3">
+                        <i class="fas fa-crown mt-1"></i>
+                        <span>Izgradnja i projektovanje <strong>Autoriteta</strong></span>
+                    </li>
+                    <li class="font-body text-gold text-sm flex items-start gap-3">
+                        <i class="fas fa-eye mt-1"></i>
+                        <span>Osnove <strong>Hipnotičke komunikacije</strong></span>
+                    </li>
+                    <li class="font-body text-gold text-sm flex items-start gap-3">
+                        <i class="fas fa-shield-alt mt-1"></i>
+                        <span>Prepoznavanje i odbrana od <strong>Manipulacije</strong></span>
+                    </li>
+                </ul>
+                
+                <p class="font-body text-gray-400 text-xs uppercase tracking-widest">Klikom na dugme ulazite direktno u sistem.</p>
+            </div>
 
-                    <!-- 3. ZLATNO DUGME -->
-                    <tr>
-                        <td align="center" style="padding: 0 30px 50px 30px;">
-                            <a href="https://npupin44.github.io/index.html/" target="_blank" style="background-color: #C5A059; color: #000000; font-weight: bold; text-decoration: none; padding: 18px 35px; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display: inline-block; border-radius: 2px; border: 1px solid #E6C676;">
-                                OTVORI CRNU KUTIJU
-                            </a>
-                        </td>
-                    </tr>
+            <!-- 3. ZLATNO DUGME -->
+            <div class="px-8 pb-12 text-center">
+                <a href="https://npupin44.github.io/index.html/" class="inline-block bg-gold text-black font-heading font-bold uppercase tracking-widest px-8 py-4 text-sm border border-gold hover:bg-white transition-colors duration-300 w-full shadow-[0_0_20px_rgba(197,160,89,0.2)]">
+                    OTVORI CRNU KUTIJU
+                </a>
+            </div>
 
-                    <!-- 4. FOOTER -->
-                    <tr>
-                        <td align="center" style="padding: 20px; background-color: #111111; color: #555555; font-size: 10px; letter-spacing: 1px; border-top: 1px solid #222222;">
-                            © 2025 ASCENDRIX SYSTEM<br>
-                            <a href="#" style="color: #444444; text-decoration: none;">Odjavi se</a>
-                        </td>
-                    </tr>
+            <!-- 4. FOOTER -->
+            <div class="bg-[#111] py-5 border-t border-[#222] text-center">
+                <p class="font-body text-[10px] text-[#555] tracking-widest uppercase">
+                    © 2025 ASCENDRIX SYSTEM
+                </p>
+            </div>
 
-                </table>
-                
-                <p style="color: #444444; font-size: 10px; margin-top: 20px; text-align: center;">
-                    Sigurna veza uspostavljena.
-                </p>
+        </div>
 
-            </td>
-        </tr>
-    </table>
+        <p class="text-center text-[#444] text-[10px] mt-6 font-body">
+            Sigurna veza uspostavljena.
+        </p>
+
+    </div>
 
 </body>
 </html>
