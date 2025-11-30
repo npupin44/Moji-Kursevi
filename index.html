@@ -1,264 +1,70 @@
-<!DOCTYPE html>
-<html lang="sr">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCENDRIX ACADEMY | Pristup</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Montserrat:wght@300;400;500;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            DEFAULT: '#C5A059',
-                            light: '#E6C676',
-                            dark: '#8A6E2F',
-                            dim: 'rgba(197, 160, 89, 0.1)'
-                        },
-                        black: {
-                            DEFAULT: '#000000',
-                            card: '#0a0a0a'
-                        }
-                    },
-                    fontFamily: {
-                        heading: ['Oswald', 'sans-serif'],
-                        body: ['Montserrat', 'sans-serif'],
-                        brand: ['Cinzel', 'serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 3s infinite',
-                        'shine': 'shine 3s linear infinite',
-                        'fade-in': 'fadeIn 0.8s ease-out forwards'
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' }
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(197, 160, 89, 0.1)' },
-                            '50%': { boxShadow: '0 0 40px rgba(197, 160, 89, 0.3)' }
-                        },
-                        shine: {
-                            '0%': { backgroundPosition: '200% center' },
-                            '100%': { backgroundPosition: '-200% center' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body { 
-            background-color: #000; 
-            color: #e5e5e5; 
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.15), transparent 40%),
-                radial-gradient(circle at 0% 90%, rgba(197, 160, 89, 0.05), transparent 30%);
-        }
-
-        /* --- GLASS CARD --- */
-        .glass-card {
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, #C5A059, transparent);
-            opacity: 0.5;
-        }
-
-        /* --- INPUT --- */
-        .input-group {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .input-field {
-            background: rgba(0, 0, 0, 0.6); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            color: white; 
-            width: 100%; 
-            padding: 18px 18px 18px 50px;
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 16px; 
-            transition: all 0.3s; 
-            outline: none;
-            border-radius: 4px;
-        }
-        
-        .input-field:focus { 
-            border-color: #C5A059; 
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.1);
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            transition: 0.3s;
-        }
-
-        .input-field:focus + .input-icon {
-            color: #C5A059;
-        }
-
-        /* --- BUTTON --- */
-        .btn-gold-gradient {
-            background: linear-gradient(135deg, #8A6E2F 0%, #C5A059 50%, #F3E5AB 100%);
-            background-size: 200% auto;
-            color: black;
-            font-family: 'Oswald', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-gold-gradient:hover {
-            background-position: right center;
-            box-shadow: 0 0 30px rgba(197, 160, 89, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* --- VISUALS --- */
-        .cube-visual {
-            position: relative;
-            z-index: 1;
-        }
-        .cube-visual::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px; height: 120px;
-            background: #C5A059;
-            filter: blur(60px);
-            opacity: 0.15;
-            z-index: -1;
-            animation: pulseGlow 4s infinite;
-        }
-
-        .highlight-text {
-            color: white;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.5);
-        }
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ascendrix Invitation</title>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
+<body style="margin: 0; padding: 0; background-color: #000000; font-family: 'Arial', sans-serif;">
+    
+    <!-- GLAVNI CRNI OKVIR -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #000000;">
+        <tr>
+            <td align="center" style="padding: 40px 10px;">
+                
+                <!-- KARTICA -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #0a0a0a; border: 1px solid #333333; border-radius: 4px;">
+                    
+                    <!-- 1. LOGO -->
+                    <tr>
+                        <td align="center" style="padding: 40px 0 20px 0; border-bottom: 1px solid #C5A059;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; letter-spacing: 6px; text-transform: uppercase; font-weight: bold;">ASCENDRIX</h1>
+                            <span style="color: #C5A059; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; display: block; margin-top: 5px;">Academy</span>
+                        </td>
+                    </tr>
 
-    <!-- Subtle Background Texture -->
-    <div class="fixed inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+                    <!-- 2. TEKST -->
+                    <tr>
+                        <td align="left" style="padding: 40px 30px; color: #dddddd; font-size: 16px; line-height: 1.6;">
+                            <p style="margin-top: 0;">Pristup je odobren.</p>
+                            
+                            <p>Spremili smo 6 taktičkih protokola koji uključuju:</p>
+                            <ul style="color: #C5A059; font-size: 14px; padding-left: 20px;">
+                                <li style="margin-bottom: 8px;">Napredne psihološke tehnike</li>
+                                <li style="margin-bottom: 8px;">Interaktivne provere znanja</li>
+                                <li style="margin-bottom: 8px;">Sistem odbrane od manipulacije</li>
+                            </ul>
+                            
+                            <p>Klikom na dugme ispod ulazite direktno u sistem.</p>
+                        </td>
+                    </tr>
 
-    <!-- MAIN CONTAINER -->
-    <div class="w-full max-w-md mx-auto relative z-10 animate-fade-in">
-        
-        <!-- LOGO HEADER -->
-        <div class="text-center mb-10">
-            <div class="inline-block relative">
-                <span class="font-brand text-gold text-2xl md:text-3xl tracking-[0.2em] font-bold uppercase drop-shadow-md">Ascendrix</span>
-                <span class="block text-[8px] md:text-[9px] text-gray-500 uppercase tracking-[0.6em] mt-1 text-center bg-black/50 backdrop-blur-sm rounded">Academy</span>
-            </div>
-        </div>
+                    <!-- 3. ZLATNO DUGME -->
+                    <tr>
+                        <td align="center" style="padding: 0 30px 50px 30px;">
+                            <a href="https://npupin44.github.io/index.html/" target="_blank" style="background-color: #C5A059; color: #000000; font-weight: bold; text-decoration: none; padding: 18px 35px; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display: inline-block; border-radius: 2px; border: 1px solid #E6C676;">
+                                OTVORI CRNU KUTIJU
+                            </a>
+                        </td>
+                    </tr>
 
-        <!-- THE CARD -->
-        <div class="glass-card rounded-2xl p-8 md:p-10">
-            
-            <!-- Icon/Visual -->
-            <div class="text-center mb-8 cube-visual animate-float">
-                <div class="inline-flex items-center justify-center w-20 h-20 rounded-xl border border-gold/30 bg-black/40 backdrop-blur-md shadow-lg transform rotate-45 group hover:rotate-0 transition-all duration-700 cursor-pointer">
-                    <i class="fas fa-cube text-4xl text-gold group-hover:scale-110 transition-transform duration-500 transform -rotate-45 group-hover:rotate-0"></i>
-                </div>
-            </div>
+                    <!-- 4. FOOTER -->
+                    <tr>
+                        <td align="center" style="padding: 20px; background-color: #111111; color: #555555; font-size: 10px; letter-spacing: 1px; border-top: 1px solid #222222;">
+                            © 2025 ASCENDRIX SYSTEM<br>
+                            <a href="#" style="color: #444444; text-decoration: none;">Odjavi se</a>
+                        </td>
+                    </tr>
 
-            <!-- Headline -->
-            <div class="text-center mb-8">
-                <h1 class="font-heading text-4xl text-white uppercase mb-2 leading-none">
-                    CRNA <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-dark via-gold to-gold-light animate-shine">KUTIJA</span>
-                </h1>
-                <div class="flex items-center justify-center gap-3 mt-4">
-                    <div class="h-px w-8 bg-gold/30"></div>
-                    <p class="text-[10px] text-gold uppercase tracking-[0.2em] font-medium">Mini Interaktivni Kurs</p>
-                    <div class="h-px w-8 bg-gold/30"></div>
-                </div>
-            </div>
+                </table>
+                
+                <p style="color: #444444; font-size: 10px; margin-top: 20px; text-align: center;">
+                    Sigurna veza uspostavljena.
+                </p>
 
-            <!-- Copywriting -->
-            <div class="text-gray-400 text-sm leading-relaxed mb-8 font-light text-center px-2">
-                <p class="mb-4">Zamisli da imaš pristup alatima koje <span class="highlight-text font-medium text-gray-200">uticajni ljudi u tvom okruženju</span> koriste intuitivno.</p>
-                <p>Ovo je <strong>interaktivni trening</strong> gde ćeš kroz 6 nivoa <em>instalirati</em> veštine Hipnotičke Komunikacije, Autoriteta i Odbrane.</p>
-            </div>
-
-            <!-- FORM -->
-            <form action="https://formspree.io/f/xrbybapo" method="POST" class="space-y-5">
-                
-                <div class="input-group">
-                    <input type="email" name="email" placeholder="Tvoja email adresa..." class="input-field" required>
-                    <i class="fas fa-envelope input-icon"></i>
-                </div>
-
-                <button type="submit" class="btn-gold-gradient w-full py-4 text-lg rounded-sm shadow-lg">
-                    ZAPOČNI BESPLATNO
-                </button>
-
-                <p class="text-[10px] text-center text-gray-600 uppercase tracking-wider flex items-center justify-center gap-2 mt-4">
-                    <i class="fas fa-lock text-gold/60"></i> Siguran Pristup
-                </p>
-
-            </form>
-
-        </div>
-
-        <!-- TRUST BADGES -->
-        <div class="mt-8 grid grid-cols-3 gap-4 text-center opacity-60">
-            <div class="flex flex-col items-center gap-1">
-                <i class="fas fa-check-circle text-gold text-lg mb-1"></i>
-                <span class="text-[9px] uppercase tracking-widest text-gray-400">6 Lekcija</span>
-            </div>
-            <div class="flex flex-col items-center gap-1 border-x border-white/10">
-                <i class="fas fa-gamepad text-gold text-lg mb-1"></i>
-                <span class="text-[9px] uppercase tracking-widest text-gray-400">Gamified</span>
-            </div>
-            <div class="flex flex-col items-center gap-1">
-                <i class="fas fa-shield-alt text-gold text-lg mb-1"></i>
-                <span class="text-[9px] uppercase tracking-widest text-gray-400">Privatno</span>
-            </div>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="mt-10 text-center">
-            <a href="https://tiktok.com/@ascendrixv1.0" target="_blank" class="inline-flex items-center gap-2 text-gray-500 hover:text-gold transition-colors text-sm group">
-                <i class="fab fa-tiktok text-lg group-hover:scale-110 transition-transform"></i>
-                <span class="uppercase text-[10px] tracking-widest">Prati na TikToku</span>
-            </a>
-            <p class="text-[9px] text-gray-700 uppercase tracking-widest mt-4">© 2025 Ascendrix Academy</p>
-        </div>
-
-    </div>
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>
